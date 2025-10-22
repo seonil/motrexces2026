@@ -690,6 +690,10 @@ a {
   margin-top: 2rem;
 }
 
+.-mt-16 {
+  margin-top: -4rem;
+}
+
 .block {
   display: block;
 }
@@ -932,6 +936,11 @@ a {
 
 .rounded-full {
   border-radius: 9999px;
+}
+
+.rounded-t-\[48px\] {
+  border-top-left-radius: 48px;
+  border-top-right-radius: 48px;
 }
 
 .border {
@@ -1212,6 +1221,10 @@ a {
   padding-top: 1.5rem;
 }
 
+.pt-16 {
+  padding-top: 4rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1410,6 +1423,12 @@ a {
 .shadow-xl {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-\[0_-40px_80px_-60px_rgba\(0\2c 0\2c 0\2c 0\.4\)\] {
+  --tw-shadow: 0 -40px 80px -60px rgba(0,0,0,0.4);
+  --tw-shadow-colored: 0 -40px 80px -60px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1612,6 +1631,10 @@ a {
     padding-right: 2.5rem;
   }
 
+  .md\:pt-20 {
+    padding-top: 5rem;
+  }
+
   .md\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -1660,6 +1683,10 @@ a {
     margin-top: 2rem;
   }
 
+  .lg\:-mt-40 {
+    margin-top: -10rem;
+  }
+
   .lg\:h-\[1370px\] {
     height: 1370px;
   }
@@ -1702,6 +1729,10 @@ a {
 
   .lg\:p-10 {
     padding: 2.5rem;
+  }
+
+  .lg\:pt-24 {
+    padding-top: 6rem;
   }
 
   .lg\:text-8xl {
