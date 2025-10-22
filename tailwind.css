@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Asta Sans';
+    src: url('./fonts/asta-sans.woff2') format('woff2');
+    font-weight: 400 700;
+    font-display: swap;
+  }
+
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-background text-neutral font-albert antialiased;
+  }
+
+  a {
+    @apply text-primary;
+  }
+}
