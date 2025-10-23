@@ -8,18 +8,148 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700;800;900&family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* 전역 가로 스크롤 방지 */
+        html,
+        body {
+            overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        /* 네비게이션 스타일 */
+        .navbar-transparent {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+        }
+
+        .navbar-scrolled {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            justify-content: center !important;
+        }
+
+        /* 브랜딩 영역 숨김 효과 */
+        .branding-hidden {
+            opacity: 0 !important;
+            transform: translateX(-30px) !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            overflow: hidden !important;
+        }
+
+        /* 네비게이션 링크 중앙 정렬 및 유리 효과 */
+        .nav-links-centered {
+            justify-content: center !important;
+            background-color: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 9999px !important;
+            padding: 12px 32px !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+            backdrop-filter: blur(16px) !important;
+        }
+
+        /* 텍스트 가시성 보장 */
+        .navbar-transparent .text-white {
+            color: white !important;
+        }
+
+        /* Hero booth image breakout */
+        .hero-booth-wrapper {
+            position: relative;
+            isolation: isolate;
+        }
+
+        .hero-booth-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: rgba(12, 12, 12, 0);
+            box-shadow: 0 28px 90px rgba(0, 0, 0, 0);
+            z-index: 0;
+        }
+
+        .hero-booth-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-booth-wrapper {
+                overflow: visible;
+            }
+
+            .hero-booth-wrapper::before {
+                inset: -18% -30% -38% -28%;
+                border-radius: 4rem;
+            }
+
+            .hero-booth-image {
+                width: 140%;
+                max-width: none;
+                transform: translateX(-5%) translateY(-5%);
+            }
+        }
+
+        /* Overview pills */
+        .overview-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.425rem;
+            align-items: flex-start;
+        }
+
+        .overview-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            min-width: 230px;
+            width: clamp(230px, 28vw, 300px);
+            background: rgba(26, 26, 26, 0.5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .overview-number,
+        .overview-label {
+            font-family: 'Albert Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.92);
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+        }
+
+        .overview-number {
+            opacity: 0.75;
+        }
+
+        @media (max-width: 1024px) {
+            .overview-list {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body class="bg-background text-neutral">
     <!-- Navigation -->
-    <nav class="fixed inset-x-0 top-0 z-50 flex justify-center px-4">
-        <div class="mt-6 flex w-full max-w-[1200px] items-center justify-between rounded-full border border-white/10 bg-black/20 px-10 py-4 text-white shadow-lg shadow-black/20 backdrop-blur">
-            <div class="flex items-center gap-4">
+    <nav id="navbar" class="fixed inset-x-0 max-w-[100px] top-0 z-50 flex justify-center px-4">
+        <div class="navbar-content mt-6 flex w-full max-w-[1200px] items-center justify-between rounded-full border border-white/10 bg-transparent px-6 py-4 text-white transition-all duration-500 ease-in-out">
+            <div id="branding" class="flex items-center gap-4 transition-all duration-500 ease-in-out">
                 <img class="h-4 w-auto" src="public/images/logo-motrex.svg" alt="MOTREX">
                 <span class="h-4 w-px bg-white/40"></span>
                 <img class="h-4 w-auto object-contain" src="public/images/ces-banner.png" alt="CES 2026">
                 <span class="text-lg font-semibold tracking-tight">2026</span>
             </div>
-            <div class="hidden gap-8 md:flex lg:gap-12">
+            <div id="nav-links" class="hidden gap-8 md:flex lg:gap-12 transition-all duration-500 ease-in-out">
                 <a class="font-albert text-base font-medium leading-[1.4] tracking-[-0.01em] text-white text-center transition hover:text-primary md:text-md lg:text-md xl:text-md" href="#why-motrex">Why Motrex</a>
                 <a class="font-albert text-base font-medium leading-[1.4] tracking-[-0.01em] text-white text-center transition hover:text-primary md:text-md lg:text-md xl:text-md" href="#innovation">CES Innovation</a>
                 <a class="font-albert text-base font-medium leading-[1.4] tracking-[-0.01em] text-white text-center transition hover:text-primary md:text-md lg:text-md xl:text-md" href="#contact">Contact</a>
@@ -28,33 +158,52 @@
     </nav>
 
     <!-- Hero -->
-    <header class="relative z-10 flex min-h-screen flex-col items-center justify-start px-6 pt-40 text-center text-white lg:min-h-[1370px]">
-        <video class="pointer-events-none absolute inset-0 h-[150%] w-full object-cover opacity-100 -z-10 lg:h-[1370px]" autoplay loop muted playsinline>
+    <header class="relative z-20 flex min-h-screen flex-col items-center justify-start px-6 pt-40 text-center text-white lg:min-h-[1370px]">
+        <video class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-100 -z-10 lg:h-[1370px]" autoplay loop muted playsinline>
             <source src="public/images/kling_20251022_Image_to_Video.webm" type="video/webm">
         </video>
-        <div class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(242,240,234,0)_0%,rgba(242,240,234,0)_30%,rgba(242,240,234,0.3)_60%,rgba(242,240,234,0.8)_85%,rgba(242,240,234,1)_100%)]"></div>
+        <div class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_0%,transparent_50%,rgba(242,240,234,1)_100%)]"></div>
         <div class="relative z-10 flex w-full max-w-5xl flex-col items-center gap-14 text-center md:gap-16 lg:gap-20">
-            <div class="space-y-2">
-                <h2 class="text-5xl font-extrabold uppercase tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">Innovate</h2>
-                <h3 class="text-3xl font-semibold uppercase tracking-[0.4em] sm:text-4xl md:text-5xl">Your</h3>
-                <h2 class="text-5xl font-extrabold uppercase tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">Own In-Cabin</h2>
+            <!-- Mobile (<= md): keep existing stack exactly -->
+            <div class="w-full flex flex-col gap-12 md:hidden">
+                <div class="space-y-2 text-left">
+                    <h2 class="text-left text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">Innovate</h2>
+                    <h3 class="text-3xl font-semibold text-left tracking-[0.4em] sm:text-4xl md:text-5xl">Your</h3>
+                    <h2 class="text-5xl font-extrabold text-left tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">Own In-Cabin</h2>
+                </div>
+
+                <div class="grid w-full gap-12 text-xs font-medium uppercase tracking-[0.4em] text-white/80">
+                    <div class="flex flex-col items-center gap-2 md:items-start">
+                        <span class="text-white/60">Venue</span>
+                        <p class="text-base font-semibold tracking-[0.25em] text-white md:text-lg">LVCC, West Hall</p>
+                        <p class="text-base font-semibold tracking-[0.25em] text-white md:text-lg">Booth #3401</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center">
+                        <p class="text-2xl text-white">2026</p>
+                        <span class="mt-1 text-sm tracking-[0.5em] text-white/60">Jan. 6~9</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid w-full gap-12 text-xs font-medium uppercase tracking-[0.4em] text-white/80 md:grid-cols-3">
-                <div class="flex flex-col items-center gap-2 md:items-start">
+            <!-- Desktop / Tablet (md+): 2x3 grid layout -->
+            <div class="hidden w-full text-left md:grid md:grid-cols-[30%_70%] md:gap-6 lg:gap-6">
+                <!-- Row 1: title full width -->
+                <h2 class="text-5xl font-extrabold tracking-tight text-left sm:text-6xl md:text-7xl lg:text-8xl md:col-span-2">Innovate</h2>
+
+                <!-- Row 2: left venue, right 'Your' -->
+                <div class="flex flex-col gap-2 text-xs font-medium uppercase tracking-[0.4em] text-white/80 md:col-start-1 md:row-start-2">
                     <span class="text-white/60">Venue</span>
                     <p class="text-base font-semibold tracking-[0.25em] text-white md:text-lg">LVCC, West Hall</p>
                     <p class="text-base font-semibold tracking-[0.25em] text-white md:text-lg">Booth #3401</p>
                 </div>
-                <div class="flex flex-col items-center justify-center">
-                    <p class="text-7xl font-black tracking-tight text-white md:text-8xl">2026</p>
-                    <span class="mt-1 text-sm uppercase tracking-[0.5em] text-white/60">Jan. 6~9</span>
+                <h3 class="text-4xl font-semibold tracking-[0.25em] text-left sm:text-4xl md:text-6xl md:col-start-2 md:row-start-2 md:self-center">Your</h3>
+
+                <!-- Row 3: left date, right 'Own In-Cabin' -->
+                <div class="flex flex-col justify-center text-left md:col-start-1 md:row-start-3">
+                    <p class="text-2xl text-white">2026</p>
+                    <span class="mt-1 text-sm font-medium uppercase tracking-[0.5em] text-white/60">Jan. 6~9</span>
                 </div>
-                <div class="flex flex-col items-center gap-2 md:items-end">
-                    <span class="text-white/60">Experience</span>
-                    <p class="text-base font-semibold tracking-[0.25em] text-white md:text-lg">Beyond Driving,</p>
-                    <p class="text-base font-semibold tracking-[0.25em] text-white md:text-lg">Beyond Imagination</p>
-                </div>
+                <h2 class="text-5xl font-extrabold tracking-tight text-left sm:text-6xl md:text-7xl lg:text-8xl md:col-start-2 md:row-start-3">Own In-Cabin</h2>
             </div>
 
             <button class="inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/10 px-12 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.4em] text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black/10">
@@ -68,61 +217,61 @@
                 </svg>
             </div>
         </div>
-    </header>
 
-    <div class="relative z-10 bg-background">
-    <main class="relative mx-auto -mt-16 flex w-full max-w-[1200px] flex-col gap-32 rounded-t-[48px] px-6 pb-24 pt-16  md:px-10 md:pt-20 lg:-mt-40 lg:pt-24">
         <!-- Overview -->
-        <section class="scroll-mt-24 pt-8">
-            <div class="flex items-center gap-3">
-                <span class="text-xs font-semibold uppercase tracking-[0.55em] text-slate-600">Overview</span>
-                <span class="hidden h-px flex-1 bg-slate-300/40 md:block"></span>
-            </div>
+        <div class="w-full max-w-5xl mt-20 px-6 relative z-30">
+            <div class="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+                <div class="space-y-8 text-left">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-xs font-semibold uppercase tracking-[0.55em] text-white/80">Overview</span>
+                    </div>
 
-            <div class="mt-12 grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
-                <div class="space-y-8">
-                    <h3 class="text-4xl font-semibold leading-tight text-neutral md:text-5xl">
-                        Innovate <span class="block">Your Own In-Cabin</span>
+                    <h3 class="text-4xl font-semibold leading-tight text-white md:text-5xl" style="text-align: left !important;">
+                        Innovate <span class="block"> Your Own In-Cabin</span>
                     </h3>
-                    <p class="text-lg leading-relaxed text-slate-600">
+                    <p class="text-lg text-left leading-relaxed text-white/90" style="text-align: left !important; font-weight: 400; opacity: 0.7;">
                         Driving Inspiration DIVE IN to the
                         <span class="block md:inline">Intelligent Mobility.</span>
                     </p>
 
-                    <div class="grid gap-4 sm:grid-cols-2">
-                        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-4 shadow-sm shadow-neutral/10">
-                            <span class="text-xl font-semibold text-primary">01</span>
-                            <span class="text-sm font-medium uppercase tracking-[0.35em] text-neutral">Mesh screen</span>
+                    <div class="overview-list">
+                        <div class="overview-item">
+                            <span class="overview-number">1</span>
+                            <span class="overview-label">Mesh screen</span>
                         </div>
-                        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-4 shadow-sm shadow-neutral/10">
-                            <span class="text-xl font-semibold text-primary">02</span>
-                            <span class="text-sm font-medium uppercase tracking-[0.35em] text-neutral">Info</span>
+                        <div class="overview-item">
+                            <span class="overview-number">2</span>
+                            <span class="overview-label">Info</span>
                         </div>
-                        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-4 shadow-sm shadow-neutral/10">
-                            <span class="text-xl font-semibold text-primary">03</span>
-                            <span class="text-sm font-medium uppercase tracking-[0.35em] text-neutral">Why Motrex</span>
+                        <div class="overview-item">
+                            <span class="overview-number">3</span>
+                            <span class="overview-label">Why MOTREX</span>
                         </div>
-                        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-4 shadow-sm shadow-neutral/10">
-                            <span class="text-xl font-semibold text-primary">04</span>
-                            <span class="text-sm font-medium uppercase tracking-[0.35em] text-neutral">Kiosk</span>
+                        <div class="overview-item">
+                            <span class="overview-number">4</span>
+                            <span class="overview-label">Kiosk</span>
                         </div>
-                        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-4 shadow-sm shadow-neutral/10">
-                            <span class="text-xl font-semibold text-primary">05</span>
-                            <span class="text-sm font-medium uppercase tracking-[0.35em] text-neutral">Tailored InCabin</span>
+                        <div class="overview-item">
+                            <span class="overview-number">5</span>
+                            <span class="overview-label">Tailored InCabin</span>
                         </div>
-                        <div class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white/80 p-4 shadow-sm shadow-neutral/10">
-                            <span class="text-xl font-semibold text-primary">06</span>
-                            <span class="text-sm font-medium uppercase tracking-[0.35em] text-neutral">Meeting room</span>
+                        <div class="overview-item">
+                            <span class="overview-number">6</span>
+                            <span class="overview-label">Meeting room</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="overflow-hidden rounded-3xl backdrop-blur">
-                    <img class="w-full object-cover" src="public/images/overview-booth.png" alt="MOTREX Booth Overview">
+                <div class="overflow-hidden rounded-3xl hero-booth-wrapper">
+                    <img class="w-full object-cover hero-booth-image" src="public/images/overview-booth.png" alt="MOTREX Booth Overview">
                 </div>
             </div>
-        </section>
+        </div>
+    </header>
 
+    <div class="relative z-20">
+    <main class="relative mx-auto flex w-full max-w-[1200px] flex-col gap-32 rounded-t-[48px] px-6 pb-24 pt-16  md:px-10 md:pt-20 lg:pt-24">
+  
         <!-- Why Motrex -->
         <section id="why-motrex" class="scroll-mt-24">
             <div class="flex items-center gap-3">
@@ -131,7 +280,7 @@
             </div>
 
             <div class="mt-10 grid gap-6 md:grid-cols-3">
-                <article class="group relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900/80 text-white shadow-2xl shadow-black/30">
+                <article class="group relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900/80 text-white shadow-2xl shadow-black/30 transition-transform duration-500 hover:scale-105">
                     <img class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" src="public/images/why01.png" alt="Technology Leadership background">
                     <div class="absolute inset-0 bg-black/40 transition duration-300 group-hover:bg-black/25"></div>
                     <div class="relative flex h-full flex-col justify-between gap-6 p-6 font-asta">
@@ -147,7 +296,7 @@
                     </div>
                 </article>
 
-                <article class="group relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900/80 text-white shadow-2xl shadow-black/30">
+                <article class="group relative overflow-hidden rounded-3xl border border-white/15 bg-slate-900/80 text-white shadow-2xl shadow-black/30 transition-transform duration-500 hover:scale-105">
                     <img class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" src="public/images/why02.png" alt="Quality Excellence background">
                     <div class="absolute inset-0 bg-black/40 transition duration-300 group-hover:bg-black/25"></div>
                     <div class="relative flex h-full flex-col justify-between gap-6 p-6 font-asta">
@@ -163,7 +312,7 @@
                     </div>
                 </article>
 
-                <article class="group relative overflow-hidden rounded-3xl border border-white/15 text-white shadow-2xl shadow-black/30">
+                <article class="group relative overflow-hidden rounded-3xl border border-white/15 text-white shadow-2xl shadow-black/30 transition-transform duration-500 hover:scale-105">
                     <img class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" src="public/images/why03.png" alt="Manufacturing Reliability background">
                     <div class="absolute inset-0 bg-black/40 transition duration-300 group-hover:bg-black/25"></div>
                     <div class="relative flex h-full flex-col justify-between gap-6 p-6 font-asta">
@@ -273,10 +422,10 @@
             </div>
 
             <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:auto-rows-[minmax(240px,_auto)] lg:grid-cols-3">
-                <article class="relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-motrex.png')] bg-cover bg-center p-6 text-white shadow-xl shadow-black/20 font-asta sm:p-8 lg:row-span-2 lg:min-h-[440px] lg:p-10">
+                <a href="https://www.motrex.co.kr/" target="_blank" rel="noopener noreferrer" class="relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-motrex.png')] bg-cover bg-center p-6 text-white shadow-xl shadow-black/20 font-asta sm:p-8 lg:row-span-2 lg:min-h-[440px] lg:p-10 transition hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-br from-black/50 via-black/20 to-black/0"></div>
                     <div class="relative flex flex-col gap-2">
-                        <h3 class="text-3xl font-semibold">Motrex</h3>
+                        <h3 class="text-3xl font-semibold">MOTREX</h3>
                         <p class="text-sm text-white/80">InCabin Solution</p>
                     </div>
                     <button class="relative mt-8 flex h-12 w-12 items-center justify-center rounded-full bg-white text-neutral transition hover:scale-105">
@@ -284,12 +433,12 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </button>
-                </article>
+                </a>
 
-                <article class="relative flex min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-MEV.png')] bg-cover bg-center p-6 text-white shadow-lg shadow-black/15 font-asta sm:min-h-[240px] sm:p-8">
+                <a href="https://www.motrexev.com/" target="_blank" rel="noopener noreferrer" class="relative flex min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-MEV.png')] bg-cover bg-center p-6 text-white shadow-lg shadow-black/15 font-asta sm:min-h-[240px] sm:p-8 transition hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-br from-black/45 via-black/25 to-black/0"></div>
                     <div class="relative flex flex-col gap-2">
-                        <h3 class="text-2xl font-semibold">Motrex EV</h3>
+                        <h3 class="text-2xl font-semibold">MEV</h3>
                         <p class="text-sm text-white/80">EV Solution</p>
                     </div>
                     <button class="relative mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-white text-neutral transition hover:scale-105">
@@ -297,12 +446,12 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </button>
-                </article>
+                </a>
 
-                <article class="relative flex min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-efm.png')] bg-cover bg-center p-6 text-white shadow-lg shadow-black/15 font-asta sm:min-h-[240px] sm:p-8">
+                <a href="http://motrexefm.com/" target="_blank" rel="noopener noreferrer" class="relative flex min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-efm.png')] bg-cover bg-center p-6 text-white shadow-lg shadow-black/15 font-asta sm:min-h-[240px] sm:p-8 transition hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-br from-black/45 via-black/25 to-black/0"></div>
                     <div class="relative flex flex-col gap-2">
-                        <h3 class="text-2xl font-semibold">Motrex efm</h3>
+                        <h3 class="text-2xl font-semibold">MOTREX efm</h3>
                         <p class="text-sm text-white/80">Internal Material</p>
                     </div>
                     <button class="relative mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-white text-neutral transition hover:scale-105">
@@ -310,9 +459,9 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </button>
-                </article>
+                </a>
 
-                <article class="relative flex min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-MTR.png')] bg-cover bg-center p-6 text-white shadow-lg shadow-black/15 font-asta sm:min-h-[240px] sm:p-8">
+                <a href="https://mtr-cavin.com/" target="_blank" rel="noopener noreferrer" class="relative flex min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-MTR.png')] bg-cover bg-center p-6 text-white shadow-lg shadow-black/15 font-asta sm:min-h-[240px] sm:p-8 transition hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-br from-black/45 via-black/25 to-black/0"></div>
                     <div class="relative flex flex-col gap-2">
                         <h3 class="text-2xl font-semibold">MTR</h3>
@@ -323,9 +472,9 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </button>
-                </article>
+                </a>
 
-                <article class="relative flex min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-junjin.png')] bg-cover bg-center p-6 text-white shadow-lg shadow-black/15 font-asta sm:min-h-[240px] sm:p-8">
+                <a href="https://www.junjin.com/kr/index.php" target="_blank" rel="noopener noreferrer" class="relative flex min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl bg-[url('./images/link-junjin.png')] bg-cover bg-center p-6 text-white shadow-lg shadow-black/15 font-asta sm:min-h-[240px] sm:p-8 transition hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-br from-black/45 via-black/25 to-black/0"></div>
                     <div class="relative flex flex-col gap-2">
                         <h3 class="text-2xl font-semibold">Junjin</h3>
@@ -336,7 +485,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </button>
-                </article>
+                </a>
             </div>
         </section>
     </main>
@@ -362,6 +511,61 @@
     </footer>
     </div>
 
+    <script>
+        // 고도화된 스크롤 네비게이션 효과
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarContent = document.querySelector('.navbar-content');
+            const branding = document.getElementById('branding');
+            const navLinks = document.getElementById('nav-links');
+            let lastScrollY = window.scrollY;
+
+            // 초기 상태: 투명 배경
+            navbarContent.classList.add('navbar-transparent');
+
+            function updateNavbarStyle() {
+                const currentScrollY = window.scrollY;
+
+                if (currentScrollY > 100) {
+                    // 스크롤 시: 브랜딩 숨기고 네비게이션 링크 중앙 정렬
+                    navbarContent.classList.remove('navbar-transparent');
+                    navbarContent.classList.add('navbar-scrolled');
+
+                    // 브랜딩 영역 숨기기
+                    branding.classList.add('branding-hidden');
+
+                    // 네비게이션 링크 중앙 정렬 및 유리 효과
+                    navLinks.classList.add('nav-links-centered');
+                } else {
+                    // 상단: 전체 네비게이션 표시
+                    navbarContent.classList.remove('navbar-scrolled');
+                    navbarContent.classList.add('navbar-transparent');
+
+                    // 브랜딩 영역 표시
+                    branding.classList.remove('branding-hidden');
+
+                    // 네비게이션 링크 원래 상태로
+                    navLinks.classList.remove('nav-links-centered');
+                }
+
+                lastScrollY = currentScrollY;
+            }
+
+            // 스크롤 이벤트 리스너 (성능 최적화)
+            let isScrolling = false;
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    window.requestAnimationFrame(function() {
+                        updateNavbarStyle();
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
+                }
+            });
+
+            // 초기 스타일 적용
+            updateNavbarStyle();
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
