@@ -141,8 +141,8 @@
 </head>
 <body class="bg-background text-neutral">
     <!-- Navigation -->
-    <nav id="navbar" class="fixed inset-x-0 max-w-[100px] top-0 z-50 flex justify-center px-4">
-        <div class="navbar-content mt-6 flex w-full max-w-[1200px] items-center justify-between rounded-full border border-white/10 bg-transparent px-6 py-4 text-white transition-all duration-500 ease-in-out">
+    <nav id="navbar" class="fixed inset-x-0 top-0 z-50 flex justify-center px-6">
+        <div class="navbar-content mt-6 flex w-full max-w-[1200px] items-center justify-between rounded-full border border-white/10 bg-transparent px-4 py-4 text-white transition-all duration-500 ease-in-out">
             <div id="branding" class="flex items-center gap-4 transition-all duration-500 ease-in-out">
                 <img class="h-4 w-auto" src="public/images/logo-motrex.svg" alt="MOTREX">
                 <span class="h-4 w-px bg-white/40"></span>
@@ -163,13 +163,13 @@
             <source src="public/images/kling_20251022_Image_to_Video.webm" type="video/webm">
         </video>
         <div class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_0%,transparent_50%,rgba(242,240,234,1)_100%)]"></div>
-        <div class="relative z-10 flex w-full max-w-5xl flex-col items-center gap-14 text-center md:gap-16 lg:gap-20">
+        <div class="relative z-10 flex w-full max-w-hero flex-col px-4 items-center gap-14 text-center md:gap-16 lg:gap-20">
             <!-- Mobile (<= md): keep existing stack exactly -->
             <div class="w-full flex flex-col gap-12 md:hidden">
-                <div class="space-y-2 text-left">
-                    <h2 class="text-left text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">Innovate</h2>
-                    <h3 class="text-3xl font-semibold text-left tracking-[0.4em] sm:text-4xl md:text-5xl">Your</h3>
-                    <h2 class="text-5xl font-extrabold text-left tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">Own In-Cabin</h2>
+                <div class="space-y-2">
+                    <h2 class="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl motion-safe:transition-[font-size,letter-spacing] motion-safe:duration-500 motion-safe:ease-out">Innovate</h2>
+                    <h3 class="text-3xl font-semibold tracking-[0.4em] sm:text-4xl md:text-5xl motion-safe:transition-[font-size,letter-spacing] motion-safe:duration-500 motion-safe:ease-out">Your</h3>
+                    <h2 class="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl motion-safe:transition-[font-size,letter-spacing] motion-safe:duration-500 motion-safe:ease-out">Own In-Cabin</h2>
                 </div>
 
                 <div class="grid w-full gap-12 text-xs font-medium uppercase tracking-[0.4em] text-white/80">
@@ -188,7 +188,7 @@
             <!-- Desktop / Tablet (md+): 2x3 grid layout -->
             <div class="hidden w-full text-left md:grid md:grid-cols-[30%_70%] md:gap-6 lg:gap-6">
                 <!-- Row 1: title full width -->
-                <h2 class="text-5xl font-extrabold tracking-tight text-left sm:text-6xl md:text-7xl lg:text-8xl md:col-span-2">Innovate</h2>
+                <h2 class="text-5xl font-extrabold tracking-tight text-left sm:text-6xl md:text-7xl lg:text-8xl md:col-span-2 motion-safe:transition-[font-size,letter-spacing] motion-safe:duration-500 motion-safe:ease-out">Innovate</h2>
 
                 <!-- Row 2: left venue, right 'Your' -->
                 <div class="flex flex-col gap-2 text-xs font-medium uppercase tracking-[0.4em] text-white/80 md:col-start-1 md:row-start-2">
@@ -196,14 +196,14 @@
                     <p class="text-base font-semibold tracking-[0.25em] text-white md:text-lg">LVCC, West Hall</p>
                     <p class="text-base font-semibold tracking-[0.25em] text-white md:text-lg">Booth #3401</p>
                 </div>
-                <h3 class="text-4xl font-semibold tracking-[0.25em] text-left sm:text-4xl md:text-6xl md:col-start-2 md:row-start-2 md:self-center">Your</h3>
+                <h3 class="text-4xl font-semibold tracking-[0.25em] text-left sm:text-4xl md:text-6xl md:col-start-2 md:row-start-2 md:self-center motion-safe:transition-[font-size,letter-spacing] motion-safe:duration-500 motion-safe:ease-out">Your</h3>
 
                 <!-- Row 3: left date, right 'Own In-Cabin' -->
                 <div class="flex flex-col justify-center text-left md:col-start-1 md:row-start-3">
                     <p class="text-2xl text-white">2026</p>
                     <span class="mt-1 text-sm font-medium uppercase tracking-[0.5em] text-white/60">Jan. 6~9</span>
                 </div>
-                <h2 class="text-5xl font-extrabold tracking-tight text-left sm:text-6xl md:text-7xl lg:text-8xl md:col-start-2 md:row-start-3">Own In-Cabin</h2>
+                <h2 class="text-5xl font-extrabold tracking-tight text-left sm:text-6xl md:text-7xl lg:text-8xl md:col-start-2 md:row-start-3 motion-safe:transition-[font-size,letter-spacing] motion-safe:duration-500 motion-safe:ease-out">Own In-Cabin</h2>
             </div>
 
             <button class="inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/10 px-12 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.4em] text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black/10">
