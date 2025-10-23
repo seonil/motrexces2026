@@ -79,6 +79,27 @@
             z-index: 1;
         }
 
+        .highlight-video {
+            position: relative;
+        }
+
+        .highlight-video video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .highlight-graphic {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .highlight-graphic.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         @media (min-width: 1024px) {
             .hero-booth-wrapper {
                 overflow: visible;
@@ -93,6 +114,14 @@
                 width: 140%;
                 max-width: none;
                 transform: translateX(-5%) translateY(-5%);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .highlight-video {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
             }
         }
 
@@ -160,7 +189,7 @@
     <!-- Hero -->
     <header class="relative z-20 flex min-h-screen flex-col items-center justify-start px-6 pt-40 text-center text-white lg:min-h-[1370px]">
         <video class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-100 -z-10 lg:h-[1370px]" autoplay loop muted playsinline>
-            <source src="public/images/kling_20251022_Image_to_Video.webm" type="video/webm">
+            <source src="public/images/bg-video.webm" type="video/webm">
         </video>
         <div class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,transparent_0%,transparent_50%,rgba(242,240,234,1)_100%)]"></div>
         <div class="relative z-10 flex w-full max-w-hero flex-col px-4 items-center gap-14 text-center md:gap-16 lg:gap-20">
@@ -338,8 +367,8 @@
             </div>
 
             <div class="mt-10 space-y-10">
-                <div class="relative overflow-hidden rounded-3xl border border-slate-200/40 shadow-2xl shadow-black/30">
-                    <video class="w-full object-cover" autoplay loop muted playsinline>
+                <div class="relative highlight-video overflow-hidden border border-slate-200/40 shadow-2xl shadow-black/30">
+                    <video class="w-full h-auto" loop muted playsinline data-autoplay-on-view>
                         <source src="public/images/3840x720-Intro_1_left.webm" type="video/webm">
                         Your browser does not support the video tag.
                     </video>
@@ -347,7 +376,7 @@
                         Integrated Digital Cockpit
                     </span>
                     <div class="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center">
-                        <img class="w-[70%] max-w-3xl rounded-3xl p-4 " src="public/images/cockpit-img.png" alt="Digital Cockpit">
+                        <img class="highlight-graphic w-[70%] max-w-3xl rounded-3xl p-4 " src="public/images/cockpit-img.png" alt="Digital Cockpit">
                     </div>
                 </div>
 
@@ -361,7 +390,7 @@
                         </div>
 
                         <div class="absolute bottom-8 left-6 space-y-1 text-white md:bottom-10 md:left-10 md:space-y-2">
-                            <h3 class="text-2xl font-semibold tracking-tight md:text-3xl">EZ Cockpit</h3>
+                            <h3 class="text-xl font-semibold tracking-tight md:text-3xl">EZ Cockpit</h3>
                             <p class="text-xs font-medium uppercase tracking-[0.4em] text-white/70 md:text-sm">CES Innovation Awards</p>
                         </div>
 
@@ -381,7 +410,7 @@
                         </div>
 
                         <div class="absolute bottom-8 left-6 space-y-1 text-white md:bottom-10 md:left-10 md:space-y-2">
-                            <h3 class="text-2xl font-semibold tracking-tight md:text-3xl">InCabin Station</h3>
+                            <h3 class="text-xl font-semibold tracking-tight md:text-3xl">InCabin Station</h3>
                             <p class="text-xs font-medium uppercase tracking-[0.4em] text-white/70 md:text-sm">CES Innovation Awards</p>
                         </div>
 
@@ -561,6 +590,46 @@
                     isScrolling = true;
                 }
             });
+
+            const highlightVideo = document.querySelector('.highlight-video video[data-autoplay-on-view]');
+            const highlightGraphic = document.querySelector('.highlight-graphic');
+            let highlightGraphicTimer = null;
+
+            if (highlightVideo) {
+                highlightVideo.pause();
+                highlightVideo.currentTime = 0;
+
+                const highlightObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const playPromise = highlightVideo.play();
+                            if (playPromise !== undefined) {
+                                playPromise.catch(() => {});
+                            }
+
+                            if (highlightGraphic && !highlightGraphic.classList.contains('is-visible')) {
+                                highlightGraphicTimer = window.setTimeout(() => {
+                                    highlightGraphic.classList.add('is-visible');
+                                    highlightGraphicTimer = null;
+                                }, 2000);
+                            }
+                        } else {
+                            highlightVideo.pause();
+
+                            if (
+                                highlightGraphicTimer !== null &&
+                                highlightGraphic &&
+                                !highlightGraphic.classList.contains('is-visible')
+                            ) {
+                                window.clearTimeout(highlightGraphicTimer);
+                                highlightGraphicTimer = null;
+                            }
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                highlightObserver.observe(highlightVideo);
+            }
 
             // 초기 스타일 적용
             updateNavbarStyle();

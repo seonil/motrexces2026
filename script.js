@@ -66,22 +66,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Parallax effect for hero section
     const heroSection = document.querySelector('.hero');
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const parallax = heroSection.querySelector('.hero-content');
-        const location = heroSection.querySelector('.hero-location');
-        const date = heroSection.querySelector('.hero-date');
+    if (heroSection) {
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = heroSection.querySelector('.hero-content');
+            const location = heroSection.querySelector('.hero-location');
+            const date = heroSection.querySelector('.hero-date');
 
-        if (parallax) {
-            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-        if (location) {
-            location.style.transform = `translateY(${scrolled * 0.3}px)`;
-        }
-        if (date) {
-            date.style.transform = `translateY(${scrolled * 0.4}px)`;
-        }
-    });
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            if (location) {
+                location.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+            if (date) {
+                date.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+        });
+    }
 
     // Button hover effects
     const buttons = document.querySelectorAll('button');
@@ -105,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-  });
+});
 
 
 // Simple utility functions
