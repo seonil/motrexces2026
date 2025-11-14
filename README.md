@@ -4,7 +4,7 @@ A React-based landing page showcasing Motrex's automotive technology innovations
 
 ## Live Demo
 
-Visit the live site: [https://YOUR_USERNAME.github.io/motrex-ces-2026-showcase/](https://YOUR_USERNAME.github.io/motrex-ces-2026-showcase/)
+Deploy to Netlify: [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/seonil/motrexces2026)
 
 ## Features
 
@@ -19,7 +19,7 @@ Visit the live site: [https://YOUR_USERNAME.github.io/motrex-ces-2026-showcase/]
 - **React 19.2.0** with TypeScript
 - **Vite 6.2.0** for build and development
 - **Tailwind CSS** via CDN for styling
-- **GitHub Pages** for deployment
+- **Netlify** for deployment
 
 ## Development
 
@@ -57,24 +57,35 @@ npm run preview
 
 ## Deployment
 
-This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
+### Deploy to Netlify (Recommended)
 
-### Setup GitHub Pages
+#### Option 1: One-Click Deploy
+Click the "Deploy to Netlify" button above to automatically deploy this project.
 
-1. Go to your repository Settings > Pages
-2. Under "Build and deployment", select:
-   - Source: **GitHub Actions**
-3. Push to the `main` branch to trigger automatic deployment
+#### Option 2: Manual Setup
+1. Push your code to GitHub
+2. Go to [Netlify](https://app.netlify.com/)
+3. Click "Add new site" > "Import an existing project"
+4. Connect your GitHub account and select this repository
+5. Netlify will auto-detect the build settings from `netlify.toml`:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+6. Click "Deploy site"
 
-The site will be available at: `https://YOUR_USERNAME.github.io/motrex-ces-2026-showcase/`
+Your site will be live at `https://YOUR-SITE-NAME.netlify.app`
 
-### Manual Deployment
+#### Continuous Deployment
+Netlify automatically deploys when you push to the `main` branch.
 
-If you need to deploy manually:
-```bash
-npm run build
-# Deploy the dist/ folder to your hosting service
-```
+### Alternative: GitHub Pages
+
+This project also includes GitHub Actions workflow for GitHub Pages deployment.
+
+1. Go to repository Settings > Pages
+2. Under "Build and deployment", select Source: **GitHub Actions**
+3. Push to `main` branch to trigger deployment
+
+Note: GitHub Pages requires a **public repository** for free tier users.
 
 ## Project Structure
 
