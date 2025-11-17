@@ -61,7 +61,6 @@ const EVOLVING_FUTURE_ITEMS: EvolvingFutureItem[] = [
     specs: [
       { label: "Recording", value: "Dual-Channel (Front + Rear)" },
       { label: "Coverage", value: "Driving / Parking / Incident Monitoring" },
-      { label: "Hardware", value: "New-Generation Main PCB & Rear Camera Ass'y" },
       { label: "Performance", value: "Stable, High-Quality Video" },
       { label: "Connectivity", value: "App-Integrated Control" },
     ],
@@ -215,8 +214,12 @@ const EvolvingFutureCarousel: React.FC = () => {
             src={item.image}
             alt=""
             aria-hidden
-            className={`md:hidden absolute inset-0 w-full h-full object-contain z-0 opacity-80 transition-opacity duration-300 ${idx === index ? 'opacity-80' : 'opacity-0'}`}
-            style={{ objectPosition: '100% bottom' }}
+            className={`md:hidden absolute inset-0 w-full h-full object-contain z-0 ${idx === index ? 'pointer-events-auto' : 'pointer-events-none'}`}
+            style={{
+              objectPosition: '100% bottom',
+              opacity: idx === index ? 0.8 : 0,
+              visibility: idx === index ? 'visible' : 'hidden'
+            }}
           />
         ))}
 
@@ -276,7 +279,7 @@ const EvolvingFutureCarousel: React.FC = () => {
         </div>
       </div>
 
-      <p className="mt-6 text-left max-w-4xl mr-auto text-gray-300 hidden md:block">{current.caption}</p>
+      <p className="mt-2 text-left max-w-4xl mr-auto text-gray-300 hidden md:block pl-8">{current.caption}</p>
     </div>
   );
 };

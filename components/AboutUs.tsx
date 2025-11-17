@@ -100,7 +100,7 @@ const aboutItems = [
     { title: 'Motrex EV', description: 'EV Solution', image: '/images/about_ev.png', link: 'https://www.motrexev.com/' },
     { title: 'Motrex efm', description: 'Interior Material', image: '/images/about_efm.png', link: 'http://www.hanminat.com/' },
     { title: 'MTR', description: 'Purpose-Built Vehicle', image: '/images/about_mtr.png', link: 'https://mtr-cavin.com/en/' },
-    { title: 'Junjin', description: 'Construction Equipment', image: '/images/about_junjin.png', link: 'https://www.junjin.com/en' },
+    { title: 'JUNJIN C&R', description: 'Construction & Robot', image: '/images/about_junjin.png', link: 'https://www.junjin.com/en' },
 ]
 
 const AboutUs: React.FC = () => {
