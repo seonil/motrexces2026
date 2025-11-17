@@ -40,7 +40,7 @@ const WhyMotrex: React.FC = () => {
     {
       title: 'Unified Strength\nfor Future Mobility',
       content: [
-        'MOTREX Group combines expertise from Motrex EV, Motrex efm, MTR, and JUNJIN C&R to deliver solutions for next-generation mobility',
+        'MOTREX Group combines expertise from Motrex EV, Motrex efm, MTR, and JUNJIN C&R to deliver solutions for next-gen mobility',
       ],
     },
   ];

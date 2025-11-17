@@ -20,7 +20,7 @@ const Vision: React.FC = () => {
                 A New Vision for
               </span>
               <span className="block" style={titleGradientStyle}>
-                In Cabin Mobility
+                In-Cabin Mobility
               </span>
             </h2>
 
@@ -62,7 +62,7 @@ const Vision: React.FC = () => {
               >
                 <h2 className="relative z-20 text-4xl font-normal leading-tight lg:text-5xl xl:text-6xl" style={titleGradientStyle}>
                   <span className="block">A New Vision for</span>
-                  <span className="block">In Cabin Mobility</span>
+                  <span className="block">In-Cabin Mobility</span>
                 </h2>
               </div>
               <img

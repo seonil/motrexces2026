@@ -44,7 +44,7 @@ const AboutCard: React.FC<AboutCardProps> = ({ title, description, image, link }
                     border: `1px solid rgba(255, 255, 255, ${isHovered ? '0.4' : '0.15'})`,
                     backdropFilter: isHovered ? 'blur(0px)' : 'blur(25px)',
                     WebkitBackdropFilter: isHovered ? 'blur(0px)' : 'blur(25px)',
-                    transition: 'backdrop-filter 0.8s ease-out, border 0.3s ease-out',
+                    transition: 'backdrop-filter 0.5s ease-out, border 0.3s ease-out',
                 }}
             />
 
@@ -55,7 +55,7 @@ const AboutCard: React.FC<AboutCardProps> = ({ title, description, image, link }
                     style={{
                         backgroundImage: `url(${image})`,
                         opacity: isHovered ? 0 : 0.3,
-                        transition: 'opacity 1.2s ease-in-out',
+                        transition: 'opacity 0.5s ease-in-out',
                     }}
                 ></div>
             )}
@@ -67,7 +67,7 @@ const AboutCard: React.FC<AboutCardProps> = ({ title, description, image, link }
                     style={{
                         backgroundImage: `url(${hoverImage})`,
                         opacity: isHovered ? 1 : 0,
-                        transition: 'opacity 1.2s ease-in-out',
+                        transition: 'opacity 0.5s ease-in-out',
                     }}
                 ></div>
             )}
@@ -98,8 +98,8 @@ const AboutCard: React.FC<AboutCardProps> = ({ title, description, image, link }
 const aboutItems = [
     { title: 'Motrex', description: 'InCabin Solution', image: '/images/about_motrex.png', link: 'https://www.motrex.co.kr/en' },
     { title: 'Motrex EV', description: 'EV Solution', image: '/images/about_ev.png', link: 'https://www.motrexev.com/' },
-    { title: 'Motrex efm', description: 'Interial Material', image: '/images/about_efm.png', link: 'http://www.hanminat.com/' },
-    { title: 'MTR', description: 'Purpose Built Vehicle', image: '/images/about_mtr.png', link: 'https://mtr-cavin.com/en/' },
+    { title: 'Motrex efm', description: 'Interior Material', image: '/images/about_efm.png', link: 'http://www.hanminat.com/' },
+    { title: 'MTR', description: 'Purpose-Built Vehicle', image: '/images/about_mtr.png', link: 'https://mtr-cavin.com/en/' },
     { title: 'Junjin', description: 'Construction Equipment', image: '/images/about_junjin.png', link: 'https://www.junjin.com/en' },
 ]
 
@@ -142,7 +142,7 @@ const AboutUs: React.FC = () => {
                             border: `1px solid rgba(255, 255, 255, ${isMotrexHovered ? '0.4' : '0.15'})`,
                             backdropFilter: isMotrexHovered ? 'blur(0px)' : 'blur(25px)',
                             WebkitBackdropFilter: isMotrexHovered ? 'blur(0px)' : 'blur(25px)',
-                            transition: 'backdrop-filter 0.8s ease-out, border 0.3s ease-out',
+                            transition: 'backdrop-filter 0.5s ease-out, border 0.3s ease-out',
                         }}
                     />
 
@@ -152,7 +152,7 @@ const AboutUs: React.FC = () => {
                         style={{
                             backgroundImage: 'url(/images/about_motrex.png)',
                             opacity: isMotrexHovered ? 0 : 0.3,
-                            transition: 'opacity 1.2s ease-in-out',
+                            transition: 'opacity 0.5s ease-in-out',
                         }}
                     ></div>
 
@@ -162,7 +162,7 @@ const AboutUs: React.FC = () => {
                         style={{
                             backgroundImage: 'url(/images/about_motrex_hover.png)',
                             opacity: isMotrexHovered ? 1 : 0,
-                            transition: 'opacity 1.2s ease-in-out',
+                            transition: 'opacity 0.5s ease-in-out',
                         }}
                     ></div>
 

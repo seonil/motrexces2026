@@ -83,7 +83,7 @@ const EVOLVING_FUTURE_ITEMS: EvolvingFutureItem[] = [
   {
     title: "Portable Charger",
     caption:
-      "Compact fast-charging hardware enables flexible deployments for fleets and pop-up events, ensuring EV drivers are never far from reliable energy.",
+      "Lightweight portable charging hardware enabling flexible deployments for fleets, pop-up events, and emergency backup power.",
     specs: [
       { label: "Power Options", value: "3.5kW / 2.9kW / 2.2kW" },
       { label: "Voltage", value: "Single Phase, 183–277Vac" },
@@ -121,7 +121,7 @@ const borderLayerStyle: React.CSSProperties & {
   WebkitMaskComposite: "xor",
   maskComposite: "exclude",
   padding: "1px",
-  borderRadius: "14px",
+  borderRadius: "0px",
 };
 
 const EvolvingFutureCarousel: React.FC = () => {
@@ -208,14 +208,17 @@ const EvolvingFutureCarousel: React.FC = () => {
         }} />
         <div className="absolute -bottom-4 left-[8%] right-[12%] h-10 blur-2xl bg-black/60 rounded-full" />
 
-        {/* Background image for sm view only - positioned behind text */}
-        <img
-          src={current.image}
-          alt=""
-          aria-hidden
-          className="md:hidden absolute inset-0 w-full h-full object-contain z-0 opacity-80"
-          style={{ objectPosition: '100% bottom' }}
-        />
+        {/* Background images for sm view only - preload all */}
+        {EVOLVING_FUTURE_ITEMS.map((item, idx) => (
+          <img
+            key={`bg-${idx}`}
+            src={item.image}
+            alt=""
+            aria-hidden
+            className={`md:hidden absolute inset-0 w-full h-full object-contain z-0 opacity-80 transition-opacity duration-300 ${idx === index ? 'opacity-80' : 'opacity-0'}`}
+            style={{ objectPosition: '100% bottom' }}
+          />
+        ))}
 
         <div className="absolute inset-0 flex flex-col gap-4 p-4 md:gap-6 md:p-6 lg:p-10 md:grid md:grid-cols-12">
           <div className="order-1 col-span-12 md:col-span-6 z-20 flex items-start md:items-center">
@@ -233,16 +236,24 @@ const EvolvingFutureCarousel: React.FC = () => {
           </div>
 
           <div className="order-2 col-span-12 md:col-span-6 relative hidden md:flex flex-col items-center justify-center md:block">
-            <img
-              src={current.image}
-              alt={current.title}
-              className="relative w-[82%] md:w-[100%] max-w-sm md:max-w-none mx-auto md:absolute md:right-[8%] lg:right-[8%] md:bottom-2 object-contain z-30 drop-shadow-[0_20px_80px_rgba(0,0,0,0.55)]"
-            />
-            <img
-              src={current.image}
-              aria-hidden
-              className="hidden md:block absolute right-[5%] lg:right-[5%] bottom-6 w-[52%] opacity-20 blur-2xl scale-95 z-10"
-            />
+            {/* Main images - preload all */}
+            {EVOLVING_FUTURE_ITEMS.map((item, idx) => (
+              <img
+                key={`main-${idx}`}
+                src={item.image}
+                alt={item.title}
+                className={`relative w-[82%] md:w-[100%] max-w-sm md:max-w-none mx-auto md:absolute md:right-[8%] lg:right-[8%] md:bottom-2 object-contain z-30 drop-shadow-[0_20px_80px_rgba(0,0,0,0.55)] transition-opacity duration-300 ${idx === index ? 'opacity-100' : 'opacity-0'}`}
+              />
+            ))}
+            {/* Shadow images - preload all */}
+            {EVOLVING_FUTURE_ITEMS.map((item, idx) => (
+              <img
+                key={`shadow-${idx}`}
+                src={item.image}
+                aria-hidden
+                className={`hidden md:block absolute right-[5%] lg:right-[5%] bottom-6 w-[52%] opacity-20 blur-2xl scale-95 z-10 transition-opacity duration-300 ${idx === index ? 'opacity-20' : 'opacity-0'}`}
+              />
+            ))}
           </div>
         </div>
 
@@ -440,9 +451,8 @@ const ImageCarousel: React.FC<{ images: string[] }> = ({ images }) => {
           />
 
           <div className="mt-2 sm:mt-4 text-left max-w-4xl mx-auto px-4 sm:px-0">
-            <p className="text-gray-300 text-sm sm:text-lg">
-              One Platform, Infinite Possibilities empowering every vehicle, from trucks to PBVs.<br />
-              MOTREX delivers seamless localization and flexible customization across every region.
+            <p className="xl:text-md text-gray-300 text-left leading-relaxed">
+              Driving Intelligence powered by MOTREX’s core expertise — advanced clusters and AVN systems engineered to elevate every journey.
             </p>
           </div>
         </>
