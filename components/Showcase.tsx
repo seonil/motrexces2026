@@ -245,7 +245,7 @@ const EvolvingFutureCarousel: React.FC = () => {
                 key={`main-${idx}`}
                 src={item.image}
                 alt={item.title}
-                className={`relative w-[82%] md:w-[100%] max-w-sm md:max-w-none mx-auto md:absolute md:right-[8%] lg:right-[8%] md:bottom-2 object-contain z-30 drop-shadow-[0_20px_80px_rgba(0,0,0,0.55)] transition-opacity duration-300 ${idx === index ? 'opacity-100' : 'opacity-0'}`}
+                className={`relative w-[82%] md:w-[100%] max-w-sm md:max-w-none mx-auto md:absolute md:right-[8%] lg:-right-[8%] md:bottom-2 lg:-bottom-10 object-contain z-20 drop-shadow-[0_20px_80px_rgba(0,0,0,0.55)] transition-opacity duration-300 ${idx === index ? 'opacity-100' : 'opacity-0'}`}
               />
             ))}
             {/* Shadow images - preload all */}
@@ -254,7 +254,7 @@ const EvolvingFutureCarousel: React.FC = () => {
                 key={`shadow-${idx}`}
                 src={item.image}
                 aria-hidden
-                className={`hidden md:block absolute right-[5%] lg:right-[5%] bottom-6 w-[52%] opacity-20 blur-2xl scale-95 z-10 transition-opacity duration-300 ${idx === index ? 'opacity-20' : 'opacity-0'}`}
+                className={`hidden md:block absolute right-[5%] lg:-right-[4%] bottom-6 lg:-bottom-1 w-[52%] opacity-20 blur-2xl scale-95 z-10 transition-opacity duration-300 ${idx === index ? 'opacity-20' : 'opacity-0'}`}
               />
             ))}
           </div>
@@ -267,7 +267,7 @@ const EvolvingFutureCarousel: React.FC = () => {
         >
           <ArrowRightIcon />
         </button>
-        <div className="absolute bottom-0 lg:bottom-2 right-4 lg:right-[140px] flex items-center gap-2 z-50">
+        <div className="absolute bottom-0 lg:-bottom-2 right-4 lg:right-[140px] flex items-center gap-2 z-50">
           {EVOLVING_FUTURE_ITEMS.map((_, idx) => (
             <button
               key={idx}
@@ -279,7 +279,7 @@ const EvolvingFutureCarousel: React.FC = () => {
         </div>
       </div>
 
-      <p className="mt-2 text-left max-w-4xl mr-auto text-gray-300 hidden md:block pl-8">{current.caption}</p>
+      <p className="mt-2 text-left max-w-4xl lg:max-w-xl mr-auto text-gray-300 hidden md:block pl-8 lg:-mt-2 lg:ml-24">{current.caption}</p>
     </div>
   );
 };
@@ -453,9 +453,9 @@ const ImageCarousel: React.FC<{ images: string[] }> = ({ images }) => {
             aria-label="Next image"
           />
 
-          <div className="mt-2 sm:mt-4 text-left max-w-4xl mx-auto px-4 sm:px-0">
+          <div className="mt-2 sm:mt-4 lg:-mt-6 text-left max-w-4xl lg:max-w-2xl mx-auto lg:mx-0 lg:ml-[130px] px-4 sm:px-0">
             <p className="xl:text-md text-gray-300 text-left leading-relaxed">
-              Driving Intelligence powered by MOTREX’s core expertise — advanced clusters and AVN systems engineered to elevate every journey.
+              Driving Intelligence powered by MOTREX's core expertise -  advanced clusters and AVN systems engineered to elevate every journey.
             </p>
           </div>
         </>
@@ -548,6 +548,19 @@ const Showcase: React.FC = () => {
       const aboveSectionBottom = sectionRect.bottom > (tabMenuHeight || 0) + FLOATING_OFFSET;
 
       setIsFloating(shouldFloat && aboveSectionBottom);
+
+      // Auto-update active tab based on scroll position
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      for (let i = sectionRefs.current.length - 1; i >= 0; i--) {
+        const section = sectionRefs.current[i];
+        if (section) {
+          const sectionTop = section.offsetTop;
+          if (scrollPosition >= sectionTop) {
+            setActiveTab(i);
+            break;
+          }
+        }
+      }
 
       // Disable rotation on mobile (sm breakpoint = 640px)
       const isMobile = window.innerWidth < 640;
@@ -645,7 +658,7 @@ const Showcase: React.FC = () => {
         <div className="relative inline-block mb-16">
           <div
             style={{
-              WebkitBoxReflect: 'below -10px linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.3) 100%)',
+              WebkitBoxReflect: 'below -10px linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.05) 100%)',
             } as React.CSSProperties}
           >
             <div className="relative inline-block">
@@ -676,7 +689,7 @@ const Showcase: React.FC = () => {
                 <button
                   key={tab}
                   onClick={() => handleTabClick(index)}
-                  className={`px-4 md:px-8 py-0 md:py-2 rounded-full text-sm md:text-base transition-all duration-300 hover:bg-white/10 ${
+                  className={`px-4 md:px-6 py-0 md:py-2 rounded-full text-sm md:text-lg transition-all duration-300 hover:bg-white/10 ${
                     activeTab === index ? 'text-white font-semi-bold' : 'text-gray-400 font-normal'
                   }`}
                   style={{ fontFamily: '"Asta Sans", sans-serif' }}
@@ -688,7 +701,7 @@ const Showcase: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-full space-y-24">
+        <div className="w-full space-y-36">
           {ShowcaseContent.map((content, index) => (
             <div
               key={content.title}
@@ -700,7 +713,15 @@ const Showcase: React.FC = () => {
               }}
               className="w-full max-w-6xl mx-auto text-center scroll-mt-32"
             >
-              <div className={`relative mb-12 ${content.title === 'Connected Comfort' ? 'z-30' : 'z-10'}`}>
+              <div
+                className={`relative mb-12 ${
+                  content.title === 'Connected Comfort'
+                    ? 'z-0'
+                    : content.title === 'Evolving Future'
+                      ? 'z-30'
+                      : 'z-10'
+                }`}
+              >
                 {content.title === 'Driving Intelligence' ? (
                   <div className="relative">
                     <h3
@@ -739,13 +760,13 @@ const Showcase: React.FC = () => {
                 ) : content.title === 'Connected Comfort' ? (
                   <>
                     <h3
-                      className="text-3xl text-left pl-5 font-normal mb-4 md:hidden"
+                      className="text-3xl text-left pl-5 font-normal mb-4 md:hidden relative z-0"
                       style={titleGradientStyle}
                     >
                       Connected Comfort
                     </h3>
                     <h3
-                      className="hidden md:block text-6xl text-right font-normal mb-4 transition-all duration-[1200ms] ease-in-out"
+                      className="hidden md:block text-6xl text-right font-normal mb-4 transition-all duration-[1200ms] ease-in-out relative z-0"
                       style={{
                         ...titleGradientStyle,
                         paddingRight: rectangleRotation === 90 ? '560px' : '128px',
@@ -755,7 +776,7 @@ const Showcase: React.FC = () => {
                     </h3>
                   </>
                 ) : content.title === 'Evolving Future' ? (
-                  <div className="relative">
+                  <div className="relative z-30">
                     <h3
                       className="text-3xl md:text-6xl text-left pl-5 md:pl-32 font-normal mb-4"
                       style={titleGradientStyle}
@@ -772,6 +793,7 @@ const Showcase: React.FC = () => {
                       style={{
                         filter: 'brightness(1)',
                         transition: 'none',
+                        zIndex: 100,
                       }}
                       onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
                         e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(73%) sepia(94%) saturate(2953%) hue-rotate(140deg) brightness(103%) contrast(106%)';
@@ -802,7 +824,7 @@ const Showcase: React.FC = () => {
                 )}
               </div>
 
-              <div className={`relative z-20 ${content.title === 'Connected Comfort' ? 'mt-0 md:-mt-[4rem] lg:-mt-[6rem]' : '-mt-[3rem] md:-mt-[4rem]'}`}>
+              <div className={`relative z-20 ${content.title === 'Connected Comfort' ? 'mt-0 md:-mt-[4rem] lg:-mt-[6.5rem]' : '-mt-[3rem] md:-mt-[4rem]'}`}>
                 {content.customRenderer ? (
                   <div className="w-full flex justify-start">
                     {content.customRenderer()}
@@ -852,11 +874,11 @@ const Showcase: React.FC = () => {
                             }}
                           >
                             <div
-                              className="relative w-full bg-black sm:rounded-[24px] rounded-[8px]"
+                              className="relative w-full bg-black sm:rounded-[15px] rounded-[8px]"
                               style={{
-                                paddingTop: '60%',
+                                paddingTop: '58%',
                                 overflow: 'hidden',
-                                border: '3px solid #000000',
+                                border: '0px solid #000000',
                                 boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
                               }}
                               aria-live="polite"
@@ -886,7 +908,10 @@ const Showcase: React.FC = () => {
                                 className={`absolute inset-0 w-full h-full object-contain sm:transition-opacity sm:duration-500 ${
                                   activeComfortImage === 'landscape' ? 'opacity-100' : 'sm:opacity-0 opacity-100'
                                 }`}
-                                style={{ transformOrigin: '50% 50%' }}
+                                style={{
+                                  transformOrigin: '50% 50%',
+                                  transform: 'scale(0.98)'
+                                }}
                               />
                               <img
                                 src="/images/comfort-portrait.png"
@@ -896,7 +921,7 @@ const Showcase: React.FC = () => {
                                   activeComfortImage === 'portrait' ? 'opacity-100' : 'opacity-0'
                                 }`}
                                 style={{
-                                  transform: 'rotate(-90deg) scale(1.65)',
+                                  transform: 'rotate(-90deg) scale(1.68)',
                                   transformOrigin: '50% 50%',
                                 }}
                               />

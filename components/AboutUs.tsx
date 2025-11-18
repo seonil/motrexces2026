@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import SectionTitle from './SectionTitle';
-import { ArrowRightIcon } from './icons/ArrowRightIcon';
 
 const titleGradientStyle: React.CSSProperties = {
   background: 'linear-gradient(90deg, #F9F9F8 0.77%, #F8F8F9 35.76%, #FCF6FF 69.35%)',
@@ -76,18 +75,6 @@ const AboutCard: React.FC<AboutCardProps> = ({ title, description, image, link }
                 <div>
                     <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-1 md:mb-2" style={titleGradientStyle}>{title}</h4>
                     <p className="text-gray-300 text-sm md:text-base lg:text-lg" style={{ opacity: 0.6 }}>{description}</p>
-                </div>
-                <div className="flex justify-end">
-                    <div
-                        className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 flex items-center justify-center rounded-full border border-white/20"
-                        style={{
-                            backgroundColor: isHovered ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
-                            transform: isHovered ? 'translateX(4px)' : 'translateX(0)',
-                            transition: 'background-color 0.3s ease-out, transform 0.3s ease-out',
-                        }}
-                    >
-                        <ArrowRightIcon />
-                    </div>
                 </div>
             </div>
         </a>
@@ -170,18 +157,6 @@ const AboutUs: React.FC = () => {
                         <div>
                             <h4 className="text-2xl md:text-3xl lg:text-5xl font-semibold mb-2 md:mb-3" style={titleGradientStyle}>{aboutItems[0].title}</h4>
                             <p className="text-gray-300 text-base md:text-lg lg:text-xl" style={{ opacity: 0.6 }}>{aboutItems[0].description}</p>
-                        </div>
-                        <div className="flex justify-end">
-                            <div
-                                className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 flex items-center justify-center rounded-full border border-white/20"
-                                style={{
-                                    backgroundColor: isMotrexHovered ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)',
-                                    transform: isMotrexHovered ? 'translateX(4px)' : 'translateX(0)',
-                                    transition: 'background-color 0.3s ease-out, transform 0.3s ease-out',
-                                }}
-                            >
-                                <ArrowRightIcon />
-                            </div>
                         </div>
                     </div>
                 </a>

@@ -24,26 +24,50 @@ const VisitUs: React.FC = () => {
                     className="w-full h-full object-cover object-right md:object-center"
                 />
             </div>
-            <div className="flex flex-col -mt-24 p-5 md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="flex flex-col -mt-24 md:-mt-28 p-5 md:flex-row justify-between items-start md:items-center gap-4">
                 {/* <h4 className="text-2xl whitespace-nowrap" style={{
                     color: '#FFF',
                     fontFamily: '"Albert Sans", sans-serif',
                     fontStyle: 'normal',
                     fontWeight: 800
                 }}>Contact</h4> */}
-                <p className="text-gray-300 flex-1  text-left">Schedule a meeting with our team to explore partnership opportunities.</p>
-                <a
-                    href="mailto:cesinfo@motrex.co.kr"
-                    style={{
-                        color: '#FFF',
-                        fontFamily: '"Albert Sans", sans-serif',
-                        fontStyle: 'normal',
-                        fontWeight: 400,
-                        lineHeight: '120%',
-                        whiteSpace: 'nowrap',
-                        textDecoration: 'underline'
-                    }}
-                >cesinfo@motrex.co.kr</a>
+                <p className="text-gray-300 flex-1 text-left lg:max-w-[50%]">Schedule a meeting with our team to explore partnership opportunities.</p>
+                <div className="flex flex-col gap-2">
+                    <a
+                        href="mailto:cesinfo@motrex.co.kr"
+                        className="flex items-center gap-2"
+                        style={{
+                            color: '#FFF',
+                            fontFamily: '"Albert Sans", sans-serif',
+                            fontStyle: 'normal',
+                            fontWeight: 400,
+                            lineHeight: '120%',
+                            whiteSpace: 'nowrap',
+                            textDecoration: 'underline'
+                        }}
+                    >
+                        <img src="/images/icon-email.png" alt="" width="20" height="20" />
+                        cesinfo@motrex.co.kr
+                    </a>
+                    <a
+                        href="https://kr.linkedin.com/company/motrex"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                        style={{
+                            color: '#FFF',
+                            fontFamily: '"Albert Sans", sans-serif',
+                            fontStyle: 'normal',
+                            fontWeight: 400,
+                            lineHeight: '120%',
+                            whiteSpace: 'nowrap',
+                            textDecoration: 'underline'
+                        }}
+                    >
+                        <img src="/images/icon-linkedin.png" alt="" width="20" height="20" />
+                        linkedin_motrex
+                    </a>
+                </div>
             </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 // Hero.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRightIcon } from './icons/ArrowRightIcon';
 
 const heroMaskOverlayStyle: React.CSSProperties = {
@@ -9,6 +9,22 @@ const heroMaskOverlayStyle: React.CSSProperties = {
 };
 
 const Hero: React.FC = () => {
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Hide scroll indicator when user scrolls down more than 200px
+      if (window.scrollY > 200) {
+        setShowScrollIndicator(false);
+      } else {
+        setShowScrollIndicator(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden p-4 text-center isolate">
       {/* <div
@@ -57,13 +73,13 @@ const Hero: React.FC = () => {
 
       {/* 2) 실제 텍스트(그라디언트 등 스타일용 – 선택) */}
       <div className="relative z-10 flex flex-col items-center">
-        <h1 className="text-7xl md:text-9xl lg:text-9xl font-bold tracking-tight bg-[linear-gradient(93deg,#68FAF8_-0.46%,rgba(104,250,248,0.27)_10.81%,rgba(255,255,255,0.4)_31.75%,rgba(205,184,255,0.5)_72.1%,rgba(255,255,255,0.1)_100.64%)] bg-clip-text text-transparent">
+        <h1 className="text-7xl sm:text-9xl md:text-9xl lg:text-10xl xl:text-[180px] font-bold tracking-tight bg-[linear-gradient(93deg,#68FAF8_-0.46%,rgba(104,250,248,0.27)_10.81%,rgba(255,255,255,0.4)_31.75%,rgba(205,184,255,0.5)_72.1%,rgba(255,255,255,0.1)_100.64%)] bg-clip-text text-transparent">
           Innovate
         </h1>
-        <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-bold tracking-tight bg-[linear-gradient(93deg,#68FAF8_-0.46%,rgba(104,250,248,0.27)_10.81%,rgba(255,255,255,0.4)_31.75%,rgba(205,184,255,0.5)_72.1%,rgba(255,255,255,0.1)_100.64%)] bg-clip-text text-transparent">
+        <h2 className="text-6xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[150px] font-bold tracking-tight bg-[linear-gradient(93deg,#68FAF8_-0.46%,rgba(104,250,248,0.27)_10.81%,rgba(255,255,255,0.4)_31.75%,rgba(205,184,255,0.5)_72.1%,rgba(255,255,255,0.1)_100.64%)] bg-clip-text text-transparent">
           Your Own
         </h2>
-        <h1 className="text-7xl sm:text-7xl md:text-9xl lg:text-9xl font-bold tracking-tight bg-[linear-gradient(93deg,#68FAF8_-0.46%,rgba(104,250,248,0.27)_10.81%,rgba(255,255,255,0.4)_31.75%,rgba(255,255,255,0.4)_72.1%,rgba(255,255,255,0.1)_100.64%)] bg-clip-text text-transparent">
+        <h1 className="text-7xl sm:text-9xl md:text-9xl lg:text-10xl xl:text-[180px] font-bold tracking-tight bg-[linear-gradient(93deg,#68FAF8_-0.46%,rgba(104,250,248,0.27)_10.81%,rgba(255,255,255,0.4)_31.75%,rgba(255,255,255,0.4)_72.1%,rgba(255,255,255,0.1)_100.64%)] bg-clip-text text-transparent">
           In-Cabin
         </h1>
         <div className="mt-6 text-2xl md:text-2xl text-gray-300 flex flex-col sm:flex-row sm:gap-2">
@@ -83,8 +99,12 @@ const Hero: React.FC = () => {
       /> */}
 
       {/* scroll cue */}
-      <div className="absolute bottom-8 z-10 flex flex-col items-center gap-2 text-gray-400">
-        {/* <span className="text-sm">scroll down</span> */}
+      <div
+        className={`absolute bottom-8 z-10 flex flex-col items-center gap-2 transition-opacity duration-500 ${
+          showScrollIndicator ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <span className="text-sm text-white">Scroll Down</span>
         <img
           src="/images/scroll.svg"
           alt="Scroll down indicator"

@@ -2,11 +2,11 @@
 import React from 'react';
 
 const MotrexLogo: React.FC = () => (
-    <img src="/images/logo-motrex.svg" alt="Motrex" width="100" height="20" />
+    <img src="/images/logo-motrex.svg" alt="Motrex" width="110" height="22" />
 );
 
 const CESLogo: React.FC = () => (
-    <img src="/images/ces-banner.png" alt="CES 2026" width="120" height="20" className="sm:scale-100 scale-[0.8] origin-right" />
+    <img src="/images/ces-banner.png" alt="CES 2026" width="120" height="auto" className="sm:scale-100 scale-[0.8] origin-right max-h-none" style={{ height: 'auto' }} />
 );
 
 

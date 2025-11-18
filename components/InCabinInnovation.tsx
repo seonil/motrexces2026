@@ -25,9 +25,9 @@ const InCabinInnovation: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative px-4 text-center py-16">
+    <section className="relative px-4 text-center py-16 md:px-0">
       <div className="relative z-10 container mx-auto flex flex-col items-center">
-        <div className="relative w-full max-w-2xl mb-12">
+        <div className="relative w-full max-w-2xl mb-12 px-4 md:px-4">
           <div className="inline-block w-full">
             <SectionTitle>Innovate Your Own In-Cabin</SectionTitle>
           </div>
@@ -38,7 +38,7 @@ const InCabinInnovation: React.FC = () => {
           />
         </div>
 
-        <div className="w-full max-w-6xl relative">
+        <div className={`w-full relative ${!showSecondVideo ? 'md:max-w-none' : 'max-w-6xl px-4'}`}>
           {!showSecondVideo && (
             <video
               ref={firstVideoRef}
@@ -46,7 +46,7 @@ const InCabinInnovation: React.FC = () => {
               autoPlay
               muted
               playsInline
-              className={`w-full h-auto rounded-lg shadow-2xl transition-opacity duration-500 ${
+              className={`w-full h-auto md:w-screen md:max-w-[100vw] md:relative md:left-1/2 md:-translate-x-1/2 md:rounded-none rounded-lg md:shadow-none shadow-2xl transition-opacity duration-500 ${
                 fadeOut ? 'opacity-0' : 'opacity-100'
               }`}
             />

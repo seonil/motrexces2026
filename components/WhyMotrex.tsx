@@ -16,7 +16,7 @@ const EDGE_EXPANSION_OFFSET = (ACTIVE_CARD_WIDTH - INACTIVE_CARD_WIDTH) / 2;
 const EDGE_NEIGHBOR_NUDGE = 42;
 
 const WhyMotrex: React.FC = () => {
-  const [activeCard, setActiveCard] = useState<number>(0);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const cardData = [
     {
@@ -101,6 +101,13 @@ const WhyMotrex: React.FC = () => {
               min-height: auto !important;
             }
           }
+
+          /* Desktop - arrow at 70% for inactive cards */
+          @media (min-width: 1025px) {
+            .arrow-position[data-active="false"] {
+              top: 70% !important;
+            }
+          }
         `}
       </style>
 
@@ -121,7 +128,7 @@ const WhyMotrex: React.FC = () => {
           <div className="why-motrex-cards">
             {cardData.map((card, index) => {
               const isActive = activeCard === index;
-              const offset = index - activeCard;
+              const offset = activeCard !== null ? index - activeCard : 0;
               const positionOffset = (index - Math.floor(cardData.length / 2)) * CARD_SPACING;
               let translateX = positionOffset;
               const scale = isActive ? 1 : 0.97;
@@ -153,8 +160,8 @@ const WhyMotrex: React.FC = () => {
               return (
                 <div
                   key={index}
-                  className="absolute overflow-hidden rounded-[30px] cursor-pointer transition-all duration-200 ease-out"
-                  onClick={() => setActiveCard(index)}
+                  className="absolute rounded-[30px] cursor-pointer transition-all duration-200 ease-out"
+                  onClick={() => setActiveCard(isActive ? null : index)}
                   style={{
                     width: cardWidth,
                     minHeight: '450px',
@@ -162,11 +169,12 @@ const WhyMotrex: React.FC = () => {
                     transform: `translateX(${translateX}px) scale(${scale})`,
                     transformOrigin,
                     zIndex: zIndex,
+                    overflow: 'visible',
                   }}
                 >
                   {/* Content overlay with gradient and backdrop blur */}
                   <div
-                    className="absolute inset-0 rounded-[30px]"
+                    className="absolute inset-0 rounded-[30px] overflow-hidden"
                     style={{
                       background: isActive
                         ? 'linear-gradient(0deg, rgba(25, 110, 255, 0.18) 50%, rgba(25.41, 109.59, 255, 0.30) 100%)'
@@ -176,6 +184,47 @@ const WhyMotrex: React.FC = () => {
                       WebkitBackdropFilter: isActive ? 'blur(25px)' : 'none',
                     }}
                   />
+
+                  {/* Click to learn more text for inactive cards */}
+                  {!isActive && (
+                    <div
+                      className="absolute pointer-events-none text-center lg:text-left text-sm lg:text-base left-0 right-0 lg:left-8 lg:right-auto"
+                      style={{
+                        top: '70%',
+                        transform: 'translateY(-50%)',
+                        opacity: 0.4,
+                        color: '#FFF',
+                        fontFamily: '"Albert Sans", sans-serif',
+                        fontWeight: 400,
+                        zIndex: 25,
+                      }}
+                    >
+                      <span className="lg:translate-y-4 lg:inline-block">Click to learn more</span>
+                    </div>
+                  )}
+
+                  {/* Arrow overlay for cards - positioned at 70% on right border edge */}
+                  <div
+                    className="absolute pointer-events-none arrow-position"
+                    data-active={isActive}
+                    style={{
+                      right: '0',
+                      top: isActive ? 'calc(70% - 10px)' : '50%',
+                      transform: 'translateX(calc(50% - 10px))',
+                      width: '40px',
+                      height: '40px',
+                      zIndex: isActive ? 35 : 25,
+                      backdropFilter: 'blur(8px)',
+                      WebkitBackdropFilter: 'blur(8px)',
+                      borderRadius: '50%',
+                    }}
+                  >
+                    <img
+                      src={isActive ? "/images/arrow-selected.png" : "/images/arrow.png"}
+                      alt=""
+                      className="w-full h-full"
+                    />
+                  </div>
 
                   {/* Card content */}
                   <div className={`relative z-10 p-4 sm:p-8 md:p-10 h-full flex flex-col ${!isActive ? 'justify-center lg:justify-start' : ''}`}>

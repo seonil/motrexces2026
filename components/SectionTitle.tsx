@@ -17,7 +17,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ children }) => {
     <div className="relative inline-block mb-12">
       <div
         style={{
-          WebkitBoxReflect: 'below -10px linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.3) 100%)',
+          WebkitBoxReflect: 'below -10px linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.05) 100%)',
         } as React.CSSProperties}
       >
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-center tracking-tighter" style={titleGradientStyle}>

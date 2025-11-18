@@ -57,7 +57,7 @@ const Vision: React.FC = () => {
             <div className="relative inline-block mb-6">
               <div
                 style={{
-                  WebkitBoxReflect: 'below -10px linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.3) 100%)',
+                  WebkitBoxReflect: 'below -10px linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.05) 100%)',
                 } as React.CSSProperties}
               >
                 <h2 className="relative z-20 text-4xl font-normal leading-tight lg:text-5xl xl:text-6xl" style={titleGradientStyle}>
