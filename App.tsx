@@ -5,7 +5,7 @@ import Hero from './components/Hero';
 import Vision from './components/Vision';
 import Showcase from './components/Showcase';
 import InCabinInnovation from './components/InCabinInnovation';
-import WhyMOTREX from './components/WhyMOTREX';
+import WhyMOTREX from './components/WhyMotrex';
 import VisitUs from './components/VisitUs';
 import AboutUs from './components/AboutUs';
 import Footer from './components/Footer';
