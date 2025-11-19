@@ -1,7 +1,7 @@
 # 모트렉스 CES 2026 쇼케이스 사이트 - 전체 텍스트 추출
 
 ## 1. Header (헤더)
-- 로고: Motrex, CES 2026
+- 로고: MOTREX, CES 2026
 
 ---
 
@@ -91,9 +91,9 @@
 
 ---
 
-## 6. Why Motrex (왜 모트렉스인가 섹션)
+## 6. Why MOTREX (왜 모트렉스인가 섹션)
 **섹션 타이틀:**
-- Why Motrex
+- Why MOTREX
 
 **카드 1:**
 - Innovation Driven by
@@ -106,7 +106,7 @@
 **카드 2:**
 - Quality Excellence &
 - Manufacturing Reliability
-- 70+ Countries Choose Motrex for Quality and Reliability
+- 70+ Countries Choose MOTREX for Quality and Reliability
 - 10+ Manufacturing Sites Under Operation Worldwide
 - Quality Assurance Aligned with Global OEM Standards
 - Cutting-Edge Manufacturing and Validation Facilities
@@ -114,7 +114,7 @@
 **카드 3:**
 - Unified Strength
 - for Future Mobility
-- MOTREX Group combines expertise from Motrex EV, Motrex efm, MTR, and JUNJIN C&R to deliver solutions for next-generation mobility
+- MOTREX Group combines expertise from MOTREX EV, MOTREX efm, MTR, and JUNJIN C&R to deliver solutions for next-generation mobility
 
 ---
 
@@ -133,9 +133,9 @@
 - About Us
 
 **회사 목록:**
-1. Motrex - InCabin Solution
-2. Motrex EV - EV Solution
-3. Motrex efm - Interior Material
+1. MOTREX - InCabin Solution
+2. MOTREX EV - EV Solution
+3. MOTREX efm - Interior Material
 4. MTR - Purpose-Built Vehicle
 5. Junjin - Construction Equipment
 
@@ -150,7 +150,7 @@
 - T. 070-4982-6000 | F. 02-6280-1170 | E. cesinfo@motrex.co.kr
 
 **저작권:**
-- Copyright © Motrex 2026 All Rights Reserved.
+- Copyright © MOTREX 2026 All Rights Reserved.
 
 ---
 
@@ -161,4 +161,4 @@
 - [ ] 숫자 및 날짜 정확성 검토
 - [ ] 연락처 정보 정확성 검토
 - [ ] 제품 사양 정확성 검토
-- [ ] 브랜드명 일관성 검토 (MOTREX vs Motrex)
+- [ ] 브랜드명 일관성 검토 (MOTREX vs MOTREX)

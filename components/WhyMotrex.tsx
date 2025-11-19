@@ -9,14 +9,11 @@ const titleGradientStyle: React.CSSProperties = {
   WebkitTextFillColor: 'transparent',
 };
 
-const CARD_SPACING = 371.2;
-const INACTIVE_CARD_WIDTH = 366;
-const ACTIVE_CARD_WIDTH = 624;
-const EDGE_EXPANSION_OFFSET = (ACTIVE_CARD_WIDTH - INACTIVE_CARD_WIDTH) / 2;
-const EDGE_NEIGHBOR_NUDGE = 42;
+const INACTIVE_CARD_WIDTH = 30; // percentage of row on desktop
+const ACTIVE_CARD_WIDTH = INACTIVE_CARD_WIDTH * 1.2;
 
-const WhyMotrex: React.FC = () => {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+const WhyMOTREX: React.FC = () => {
+  const [activeCard, setActiveCard] = useState<number | null>(0);
 
   const cardData = [
     {
@@ -24,15 +21,15 @@ const WhyMotrex: React.FC = () => {
       content: [
         '25 Years of Pioneering Automotive HMI Solutions',
         '4-Time Winner of CES Innovation Award',
-        'Full-spectrum (HW/SW/UX) R&D Capabilities',
+        'Full-Spectrum (HW/SW/UX) R&D Capabilities',
         'Trusted Partner to Global Leading OEMs',
       ],
     },
     {
       title: 'Quality Excellence &\nManufacturing Reliability',
       content: [
-        '70+ Countries Choose Motrex for Quality and Reliability',
-        '10+ Manufacturing Sites Under Operation Worldwide',
+        '70+ Countries Choose MOTREX for Quality and Reliability',
+        '10+ Manufacturing Sites in Operation Worldwide',
         'Quality Assurance Aligned with Global OEM Standards',
         'Cutting-Edge Manufacturing and Validation Facilities',
       ],
@@ -40,10 +37,12 @@ const WhyMotrex: React.FC = () => {
     {
       title: 'Unified Strength\nfor Future Mobility',
       content: [
-        'MOTREX Group combines expertise from Motrex EV, Motrex efm, MTR, and JUNJIN C&R to deliver solutions for next-gen mobility',
+        'MOTREX Group combines expertise from MOTREX EV, MOTREX efm, MTR, and JUNJIN C&R to deliver solutions for next-gen mobility',
       ],
     },
   ];
+
+  const backgroundImages = ['/images/why1.png', '/images/why2.png', '/images/why3.png'];
 
   return (
     <>
@@ -66,14 +65,15 @@ const WhyMotrex: React.FC = () => {
           }
 
           .why-motrex-cards {
-            position: relative;
             width: 100%;
             max-width: 1200px;
             margin: 4rem auto 0;
             min-height: 500px;
             display: flex;
-            align-items: center;
+            align-items: stretch;
             justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
           }
 
           @media (max-width: 640px) {
@@ -89,6 +89,7 @@ const WhyMotrex: React.FC = () => {
               gap: 1rem;
               min-height: auto;
               padding: 0 1rem;
+              align-items: center;
             }
 
             .why-motrex-cards > div {
@@ -104,6 +105,11 @@ const WhyMotrex: React.FC = () => {
 
           /* Desktop - arrow at 70% for inactive cards */
           @media (min-width: 1025px) {
+            .why-motrex-cards {
+              gap: 1rem;
+              flex-wrap: nowrap;
+            }
+
             .arrow-position[data-active="false"] {
               top: 70% !important;
             }
@@ -115,7 +121,7 @@ const WhyMotrex: React.FC = () => {
         <div className="container mx-auto flex flex-col items-center relative z-10 why-motrex-main">
           <div className="relative w-full max-w-lg">
             <div className="inline-block w-full">
-              <SectionTitle>Why Motrex</SectionTitle>
+              <SectionTitle>Why MOTREX</SectionTitle>
             </div>
             <img
               src="/images/effect-title.png"
@@ -128,48 +134,26 @@ const WhyMotrex: React.FC = () => {
           <div className="why-motrex-cards">
             {cardData.map((card, index) => {
               const isActive = activeCard === index;
-              const offset = activeCard !== null ? index - activeCard : 0;
-              const positionOffset = (index - Math.floor(cardData.length / 2)) * CARD_SPACING;
-              let translateX = positionOffset;
-              const scale = isActive ? 1 : 0.97;
               const activeWidth = isActive ? ACTIVE_CARD_WIDTH : INACTIVE_CARD_WIDTH;
-              const cardWidth = `${activeWidth}px`;
-              const zIndex = isActive ? 30 : 20 - Math.abs(offset) * 5;
-              const isFirst = index === 0;
-              const isLast = index === cardData.length - 1;
-              const isEdgeActive = isActive && (isFirst || isLast);
-
-              if (isFirst && isActive) {
-                translateX += EDGE_EXPANSION_OFFSET;
-              } else if (isLast && isActive) {
-                translateX -= EDGE_EXPANSION_OFFSET;
-              }
-
-              if (activeCard === 0 && index !== 0) {
-                translateX += EDGE_NEIGHBOR_NUDGE;
-              } else if (activeCard === cardData.length - 1 && index !== cardData.length - 1) {
-                translateX -= EDGE_NEIGHBOR_NUDGE;
-              }
-
-              const transformOrigin = isEdgeActive
-                ? isFirst
-                  ? 'left center'
-                  : 'right center'
-                : 'center center';
+              const cardWidth = `${activeWidth}%`;
+              const zIndex = isActive ? 30 : 10;
 
               return (
                 <div
                   key={index}
-                  className="absolute rounded-[30px] cursor-pointer transition-all duration-200 ease-out"
+                  className="relative rounded-[30px] cursor-pointer transition-all duration-200 ease-out"
                   onClick={() => setActiveCard(isActive ? null : index)}
                   style={{
                     width: cardWidth,
                     minHeight: '450px',
                     height: isActive ? '480px' : '420px',
-                    transform: `translateX(${translateX}px) scale(${scale})`,
-                    transformOrigin,
                     zIndex: zIndex,
-                    overflow: 'visible',
+                    flexShrink: 0,
+                    backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                    backgroundImage: isActive ? `url(${backgroundImages[index]})` : 'none',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
                   }}
                 >
                   {/* Content overlay with gradient and backdrop blur */}
@@ -177,11 +161,14 @@ const WhyMotrex: React.FC = () => {
                     className="absolute inset-0 rounded-[30px] overflow-hidden"
                     style={{
                       background: isActive
-                        ? 'linear-gradient(0deg, rgba(25, 110, 255, 0.18) 50%, rgba(25.41, 109.59, 255, 0.30) 100%)'
-                        : 'linear-gradient(0deg, rgba(192.93, 192.93, 192.93, 0.10) 0%, rgba(255, 255, 255, 0.40) 100%)',
+                        ? 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.3) 100%)'
+                        : 'linear-gradient(180deg, rgba(9, 17, 39, 0.35) 0%, rgba(9, 17, 39, 0.85) 100%)',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
                       border: isActive ? '2px solid rgba(255, 255, 255, 0.3)' : '1px solid rgba(255, 255, 255, 0.15)',
-                      backdropFilter: isActive ? 'blur(25px)' : 'none',
-                      WebkitBackdropFilter: isActive ? 'blur(25px)' : 'none',
+                      backdropFilter: 'none',
+                      WebkitBackdropFilter: 'none',
                     }}
                   />
 
@@ -213,7 +200,7 @@ const WhyMotrex: React.FC = () => {
                       transform: 'translateX(calc(50% - 10px))',
                       width: '40px',
                       height: '40px',
-                      zIndex: isActive ? 35 : 25,
+                      zIndex: 50,
                       backdropFilter: 'blur(8px)',
                       WebkitBackdropFilter: 'blur(8px)',
                       borderRadius: '50%',
@@ -231,8 +218,8 @@ const WhyMotrex: React.FC = () => {
                     <div>
                       {/* Title stays anchored to the top */}
                       <h3
-                        className={`font-bold mb-4 transition-all text-center ${
-                          isActive ? 'text-2xl sm:text-3xl md:text-3xl xl:text-4xl' : 'text-xl sm:text-2xl md:text-2xl'
+                        className={`font-bold mb-4 transition-all text-center lg:text-left ${
+                          isActive ? 'text-2xl sm:text-3xl lg:text-2xl xl:text-3xl' : 'text-xl sm:text-2xl lg:text-xl'
                         }`}
                         style={{
                           ...titleGradientStyle,
@@ -251,7 +238,7 @@ const WhyMotrex: React.FC = () => {
                         {index === 0 || index === 1 ? (
                           <ul className="space-y-3">
                             {card.content.map((item, itemIndex) => (
-                              <li key={itemIndex} className="flex items-start gap-3 text-gray-50 text-sm sm:text-lg xl:text-xl">
+                              <li key={itemIndex} className="flex items-start gap-3 text-gray-50 text-sm sm:text-lg lg:text-base xl:text-lg">
                                 <div className="mt-0.5">
                                   <CheckIcon />
                                 </div>
@@ -260,7 +247,7 @@ const WhyMotrex: React.FC = () => {
                             ))}
                           </ul>
                         ) : (
-                          <p className="text-gray-50/95 leading-relaxed text-sm sm:text-lg xl:text-xl">{card.content[0]}</p>
+                          <p className="text-gray-50/95 leading-relaxed text-sm sm:text-lg lg:text-base xl:text-lg">{card.content[0]}</p>
                         )}
                       </div>
                     ) : (
@@ -277,4 +264,4 @@ const WhyMotrex: React.FC = () => {
   );
 };
 
-export default WhyMotrex;
+export default WhyMOTREX;

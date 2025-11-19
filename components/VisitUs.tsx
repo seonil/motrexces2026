@@ -16,26 +16,54 @@ const VisitUs: React.FC = () => {
             className="absolute left-1/2 top-1/2 transform -translate-x-1/2 pointer-events-none -z-10 w-[100%] sm:translate-y-[-53%] translate-y-[-58%]"
           />
         </div>
-        <div className="p-8 w-full max-w-4xl backdrop-blur-sm">
-            <div className="w-full h-64 md:h-96 bg-gray-800 rounded-lg mb-8 overflow-hidden">
+        <div className="p-8 w-full lg:max-w-[1200px] max-w-4xl backdrop-blur-sm">
+            <div className="relative w-full rounded-lg overflow-hidden border border-white/20">
                 <img
                     src="/images/map.png"
                     alt="CES 2026 Location Map"
-                    className="w-full h-full object-cover object-right md:object-center"
+                    className="w-full aspect-[16/9] max-h-[360px] sm:max-h-[520px] lg:max-h-[620px] object-cover object-center"
                 />
+                {/* Contact info - overlay on sm and above, below image on mobile */}
+                <div className="hidden sm:flex absolute inset-0 items-end p-5 lg:p-6">
+                    <div className="w-full flex flex-row items-end justify-between gap-3">
+                        <div className="flex flex-col gap-2 md:gap-3 md:ml-[2%]">
+                            <p className="text-gray-300 text-md lg:text-xl text-left">Let's discuss how MOTREX can drive your in-cabin innovation.</p>
+                            <a
+                                href="mailto:cesinfo@motrex.co.kr"
+                                className="flex items-center gap-2 text-sm lg:text-xl"
+                                style={{
+                                    color: '#FFF',
+                                    fontFamily: '"Albert Sans", sans-serif',
+                                    fontStyle: 'normal',
+                                    fontWeight: 400,
+                                    lineHeight: '120%',
+                                    whiteSpace: 'nowrap',
+                                    textDecoration: 'underline'
+                                }}
+                            >
+                                <img src="/images/icon-email.png" alt="" className="w-5 h-5" />
+                                cesinfo@motrex.co.kr
+                            </a>
+                        </div>
+                        {/* LinkedIn link - responsive sizing */}
+                        <a
+                            href="https://kr.linkedin.com/company/motrex"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 md:mr-[2%]"
+                        >
+                            <img src="/images/icon-linkedin.png" className="h-[33px] md:h-8 lg:h-[60px] w-auto"/>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div className="flex flex-col -mt-24 md:-mt-28 p-5 md:flex-row justify-between items-start md:items-center gap-4">
-                {/* <h4 className="text-2xl whitespace-nowrap" style={{
-                    color: '#FFF',
-                    fontFamily: '"Albert Sans", sans-serif',
-                    fontStyle: 'normal',
-                    fontWeight: 800
-                }}>Contact</h4> */}
-                <p className="text-gray-300 flex-1 text-left lg:max-w-[50%]">Schedule a meeting with our team to explore partnership opportunities.</p>
-                <div className="flex flex-col gap-2">
+            {/* Mobile contact info - outside image */}
+            <div className="sm:hidden flex flex-col gap-4 mt-6 px-2">
+                <div className="flex flex-col gap-3">
+                    <p className="text-gray-300 text-sm text-left">Let's discuss how MOTREX can drive your in-cabin innovation.</p>
                     <a
                         href="mailto:cesinfo@motrex.co.kr"
-                        className="flex items-center gap-2"
+                        className="flex items-center gap-2 text-xs"
                         style={{
                             color: '#FFF',
                             fontFamily: '"Albert Sans", sans-serif',
@@ -46,28 +74,19 @@ const VisitUs: React.FC = () => {
                             textDecoration: 'underline'
                         }}
                     >
-                        <img src="/images/icon-email.png" alt="" width="20" height="20" />
+                        <img src="/images/icon-email.png" alt="" className="w-4 h-4" />
                         cesinfo@motrex.co.kr
                     </a>
-                    <a
-                        href="https://kr.linkedin.com/company/motrex"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
-                        style={{
-                            color: '#FFF',
-                            fontFamily: '"Albert Sans", sans-serif',
-                            fontStyle: 'normal',
-                            fontWeight: 400,
-                            lineHeight: '120%',
-                            whiteSpace: 'nowrap',
-                            textDecoration: 'underline'
-                        }}
-                    >
-                        <img src="/images/icon-linkedin.png" alt="" width="20" height="20" />
-                        linkedin_motrex
-                    </a>
                 </div>
+                {/* LinkedIn link */}
+                <a
+                    href="https://kr.linkedin.com/company/motrex"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 self-start"
+                >
+                    <img src="/images/icon-linkedin.png" className="h-6 w-auto"/>
+                </a>
             </div>
         </div>
       </div>

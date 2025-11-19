@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
 
       {/* scroll cue */}
       <div
-        className={`absolute bottom-8 z-10 flex flex-col items-center gap-2 transition-opacity duration-500 ${
+        className={`absolute bottom-8 z-10 flex flex-col items-center gap-2 transition-opacity duration-500 animate-bounce ${
           showScrollIndicator ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -108,10 +108,7 @@ const Hero: React.FC = () => {
         <img
           src="/images/scroll.svg"
           alt="Scroll down indicator"
-          className="w-8 h-auto animate-bounce"
-          style={{
-            animation: 'bounce 2s ease-in-out infinite',
-          }}
+          className="w-8 h-auto"
         />
       </div>
     </section>

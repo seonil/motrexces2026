@@ -5,7 +5,7 @@ import Hero from './components/Hero';
 import Vision from './components/Vision';
 import Showcase from './components/Showcase';
 import InCabinInnovation from './components/InCabinInnovation';
-import WhyMotrex from './components/WhyMotrex';
+import WhyMOTREX from './components/WhyMOTREX';
 import VisitUs from './components/VisitUs';
 import AboutUs from './components/AboutUs';
 import Footer from './components/Footer';
@@ -45,7 +45,7 @@ const App: React.FC = () => {
           <Vision />
           <Showcase />
           <InCabinInnovation />
-          <WhyMotrex />
+          <WhyMOTREX />
         </main>
       </div>
 

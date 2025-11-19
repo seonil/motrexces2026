@@ -1,6 +1,6 @@
-# Motrex CES 2026 Showcase
+# MOTREX CES 2026 Showcase
 
-A React-based landing page showcasing Motrex's automotive technology innovations at the Consumer Electronics Show 2026. Features in-cabin mobility solutions, driving intelligence systems, connected comfort, and EV charging solutions.
+A React-based landing page showcasing MOTREX's automotive technology innovations at the Consumer Electronics Show 2026. Features in-cabin mobility solutions, driving intelligence systems, connected comfort, and EV charging solutions.
 
 ## Live Demo
 
@@ -97,7 +97,7 @@ motrex-ces-2026-showcase/
 │   ├── Vision.tsx
 │   ├── Showcase.tsx    # Main interactive component
 │   ├── InCabinInnovation.tsx
-│   ├── WhyMotrex.tsx
+│   ├── WhyMOTREX.tsx
 │   ├── VisitUs.tsx
 │   ├── AboutUs.tsx
 │   └── Footer.tsx
@@ -113,8 +113,8 @@ motrex-ces-2026-showcase/
 
 ## Contributing
 
-This is a showcase project for Motrex CES 2026. For questions or collaboration opportunities, please contact the Motrex team.
+This is a showcase project for MOTREX CES 2026. For questions or collaboration opportunities, please contact the MOTREX team.
 
 ## License
 
-Copyright © 2026 Motrex. All rights reserved.
+Copyright © 2026 MOTREX. All rights reserved.
