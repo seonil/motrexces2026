@@ -129,6 +129,7 @@ const EvolvingFutureCarousel: React.FC = () => {
   const current = EVOLVING_FUTURE_ITEMS[index];
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const totalItems = EVOLVING_FUTURE_ITEMS.length;
 
   useEffect(() => {
     const updateClipPath = () => {
@@ -140,8 +141,8 @@ const EvolvingFutureCarousel: React.FC = () => {
     return () => window.removeEventListener('resize', updateClipPath);
   }, []);
 
-  const next = () => setIndex((prev) => (prev + 1) % EVOLVING_FUTURE_ITEMS.length);
-  const prev = () => setIndex((prevIndex) => (prevIndex - 1 + EVOLVING_FUTURE_ITEMS.length) % EVOLVING_FUTURE_ITEMS.length);
+  const next = () => setIndex((prev) => (prev + 1) % totalItems);
+  const prev = () => setIndex((prevIndex) => (prevIndex - 1 + totalItems) % totalItems);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -166,6 +167,128 @@ const EvolvingFutureCarousel: React.FC = () => {
     touchStartX.current = 0;
     touchEndX.current = 0;
   };
+
+  const getCardTransform = (position: number): React.CSSProperties => {
+    if (position === 0) {
+      return { transform: 'translateX(0) scale(1)' };
+    }
+    if (position === 1) {
+      return { transform: 'translateX(38%) scale(0.63)' };
+    }
+    return { transform: 'translateX(52%) scale(0.59)' };
+  };
+
+  const getCardStateClasses = (position: number) => {
+    if (position === 0) {
+      return 'opacity-100 blur-0 pointer-events-auto z-30';
+    }
+    if (position === 1) {
+      return 'opacity-75 blur-sm pointer-events-none z-20';
+    }
+    return 'opacity-0 blur-lg pointer-events-none z-10';
+  };
+
+  const renderCard = (item: EvolvingFutureItem, isActive: boolean) => (
+    <div className="relative w-full h-full select-none" aria-hidden={!isActive}>
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          clipPath: clipPath as any,
+        }}
+      >
+        <div
+          className="absolute inset-0 bg-[#050517]/95"
+          style={{
+            boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+          }}
+        />
+        <div
+          className="absolute inset-[1px] pointer-events-none"
+          style={{
+            ...borderLayerStyle,
+            clipPath: clipPath as any,
+          }}
+        />
+        <div className="md:hidden absolute inset-0 overflow-hidden rounded-[18px]">
+          <img
+            src={item.image}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-contain z-0"
+            style={{
+              objectPosition: '100% bottom',
+              opacity: 0.8,
+              filter: 'drop-shadow(0 20px 80px rgba(0,0,0,0.55))',
+            }}
+          />
+        </div>
+      </div>
+
+      <div
+        className="absolute -bottom-4 left-[8%] right-[12%] h-10 blur-2xl bg-black/60 rounded-full transition-opacity duration-500"
+        style={{ opacity: isActive ? 1 : 0.4 }}
+      />
+
+      <div className="relative h-full flex flex-col gap-4 p-4 md:gap-6 md:p-6 lg:p-10 md:grid md:grid-cols-12">
+        <div className="order-1 col-span-12 md:col-span-6 z-30 flex items-start md:items-center">
+          <div className="text-left w-full md:pl-8 lg:pl-[90px]">
+            <h4 className="text-white text-xl md:text-4xl font-semibold mb-3 md:mb-6 drop-shadow-lg md:drop-shadow-none">
+              {item.title}
+            </h4>
+            <dl className="text-white/95 md:text-white/85 text-xs md:text-base space-y-2 md:space-y-3 drop-shadow-md md:drop-shadow-none">
+              {item.specs.map((spec) => (
+                <div key={spec.label} className="flex flex-col md:flex-row gap-0.5 md:gap-4">
+                  <dt className="md:w-32 text-white/80 md:text-white/60 text-[10px] md:text-xs uppercase tracking-wide font-medium md:font-normal">
+                    {spec.label}
+                  </dt>
+                  <dd className="flex-1 text-xs md:text-base">{spec.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+
+        <div className="order-2 col-span-12 md:col-span-6 relative hidden md:flex flex-col items-center justify-center">
+          <div className="relative w-full h-full overflow-visible">
+            {isActive && (
+              <>
+                <div
+                  className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[30%] pointer-events-none -z-10"
+                  style={{
+                    background: 'radial-gradient(ellipse at center, #5BD9D8 0%, transparent 90%)',
+                    filter: 'blur(40px)',
+                    opacity: 0.25,
+                  }}
+                />
+                <div
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[30%] pointer-events-none -z-10"
+                  style={{
+                    background: 'radial-gradient(ellipse at center, #D112E6 0%, transparent 90%)',
+                    filter: 'blur(40px)',
+                    opacity: 0.2,
+                  }}
+                />
+              </>
+            )}
+            <img
+              src={item.image}
+              alt={item.title}
+              className="relative w-[82%] md:w-[100%] max-w-sm md:max-w-none mx-auto md:absolute md:right-[8%] lg:-right-[8%] md:bottom-2 lg:-bottom-10 object-contain z-30 drop-shadow-[0_20px_80px_rgba(0,0,0,0.55)]"
+              style={{
+                filter: isActive ? undefined : 'brightness(0.6)',
+              }}
+            />
+            <img
+              src={item.image}
+              aria-hidden
+              className="hidden md:block absolute right-[5%] lg:-right-[4%] bottom-6 lg:-bottom-1 w-[52%] opacity-20 blur-2xl scale-95 z-10"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="relative w-full max-w-full md:max-w-4xl lg:max-w-6xl ml-0 mr-auto px-4 md:px-2">
@@ -193,78 +316,24 @@ const EvolvingFutureCarousel: React.FC = () => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div
-          className="absolute inset-0 bg-[#050517]/95 rounded-[18px]"
-          style={{
-            clipPath: clipPath as any,
-            boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-          }}
-        />
-        <div className="absolute inset-[1px] pointer-events-none" style={{
-          ...borderLayerStyle,
-          clipPath: clipPath as any,
-        }} />
-        <div className="absolute -bottom-4 left-[8%] right-[12%] h-10 blur-2xl bg-black/60 rounded-full" />
+        {EVOLVING_FUTURE_ITEMS.map((item, itemIndex) => {
+          const position = (itemIndex - index + totalItems) % totalItems;
+          const isActive = position === 0;
+          const stateClasses = getCardStateClasses(position);
 
-        {/* Background images for sm view only - preload all */}
-        {EVOLVING_FUTURE_ITEMS.map((item, idx) => (
-          <img
-            key={`bg-${idx}`}
-            src={item.image}
-            alt=""
-            aria-hidden
-            className={`md:hidden absolute inset-0 w-full h-full object-contain z-0 ${idx === index ? 'pointer-events-auto' : 'pointer-events-none'}`}
-            style={{
-              objectPosition: '100% bottom',
-              opacity: idx === index ? 0.8 : 0,
-              visibility: idx === index ? 'visible' : 'hidden'
-            }}
-          />
-        ))}
-
-        <div className="absolute inset-0 flex flex-col gap-4 p-4 md:gap-6 md:p-6 lg:p-10 md:grid md:grid-cols-12">
-          <div className="order-1 col-span-12 md:col-span-6 z-20 flex items-start md:items-center">
-            <div className="text-left w-full md:pl-8 lg:pl-[90px]">
-              <h4 className="text-white text-xl md:text-4xl font-semibold mb-3 md:mb-6 drop-shadow-lg md:drop-shadow-none">{current.title}</h4>
-              <dl className="text-white/95 md:text-white/85 text-xs md:text-base space-y-2 md:space-y-3 drop-shadow-md md:drop-shadow-none">
-                {current.specs.map((spec) => (
-                  <div key={spec.label} className="flex flex-col md:flex-row gap-0.5 md:gap-4">
-                    <dt className="md:w-32 text-white/80 md:text-white/60 text-[10px] md:text-xs uppercase tracking-wide font-medium md:font-normal">{spec.label}</dt>
-                    <dd className="flex-1 text-xs md:text-base">{spec.value}</dd>
-                  </div>
-                ))}
-              </dl>
+          return (
+            <div
+              key={item.title}
+              className={`absolute inset-0 transition-all duration-700 ease-out will-change-transform ${stateClasses}`}
+              style={getCardTransform(position)}
+              aria-hidden={!isActive}
+            >
+              {renderCard(item, isActive)}
             </div>
-          </div>
+          );
+        })}
 
-          <div className="order-2 col-span-12 md:col-span-6 relative hidden md:flex flex-col items-center justify-center md:block">
-            {/* Main images - preload all */}
-            {EVOLVING_FUTURE_ITEMS.map((item, idx) => (
-              <img
-                key={`main-${idx}`}
-                src={item.image}
-                alt={item.title}
-                className={`relative w-[82%] md:w-[100%] max-w-sm md:max-w-none mx-auto md:absolute md:right-[8%] lg:-right-[8%] md:bottom-2 lg:-bottom-10 object-contain z-20 drop-shadow-[0_20px_80px_rgba(0,0,0,0.55)] transition-opacity duration-300 ${idx === index ? 'opacity-100' : 'opacity-0'}`}
-              />
-            ))}
-            {/* Shadow images - preload all */}
-            {EVOLVING_FUTURE_ITEMS.map((item, idx) => (
-              <img
-                key={`shadow-${idx}`}
-                src={item.image}
-                aria-hidden
-                className={`hidden md:block absolute right-[5%] lg:-right-[4%] bottom-6 lg:-bottom-1 w-[52%] opacity-20 blur-2xl scale-95 z-10 transition-opacity duration-300 ${idx === index ? 'opacity-20' : 'opacity-0'}`}
-              />
-            ))}
-          </div>
-        </div>
-
-        <button
-          onClick={next}
-          className="hidden"
-          aria-label="Show next concept"
-        >
+        <button onClick={next} className="hidden" aria-label="Show next concept">
           <ArrowRightIcon />
         </button>
         <div className="absolute bottom-0 lg:-bottom-2 right-4 lg:right-[140px] flex items-center gap-2 z-50">
@@ -272,14 +341,16 @@ const EvolvingFutureCarousel: React.FC = () => {
             <button
               key={idx}
               onClick={() => setIndex(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${idx === index ? "w-10 bg-white" : "w-4 bg-white/40"}`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${idx === index ? 'w-10 bg-white' : 'w-4 bg-white/40'}`}
               aria-label={`Go to concept ${idx + 1}`}
             />
           ))}
         </div>
       </div>
 
-      <p className="mt-2 text-left max-w-4xl lg:max-w-xl mr-auto text-gray-300 hidden md:block pl-8 lg:-mt-2 lg:ml-24">{current.caption}</p>
+      <p className="mt-2 text-left max-w-4xl lg:max-w-xl mr-auto text-gray-300 hidden md:block pl-8 lg:-mt-2 lg:ml-24">
+        {current.caption}
+      </p>
     </div>
   );
 };
