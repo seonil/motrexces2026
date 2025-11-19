@@ -210,19 +210,20 @@ const EvolvingFutureCarousel: React.FC = () => {
             clipPath: clipPath as any,
           }}
         />
-        <div className="md:hidden absolute inset-0 overflow-hidden rounded-[18px]">
-          <img
-            src={item.image}
-            alt=""
-            aria-hidden
-            className="absolute inset-0 w-full h-full object-contain z-0"
-            style={{
-              objectPosition: '100% bottom',
-              opacity: 0.8,
-              filter: 'drop-shadow(0 20px 80px rgba(0,0,0,0.55))',
-            }}
-          />
-        </div>
+      </div>
+      {/* Mobile product image - moved outside clipPath */}
+      <div className="md:hidden absolute inset-0 overflow-visible z-40 pointer-events-none">
+        <img
+          src={item.image}
+          alt=""
+          aria-hidden
+          className="absolute w-[70%] h-auto object-contain"
+          style={{
+            bottom: '5%',
+            right: '-10%',
+            filter: 'drop-shadow(0 20px 80px rgba(0,0,0,0.55))',
+          }}
+        />
       </div>
 
       <div
@@ -231,18 +232,18 @@ const EvolvingFutureCarousel: React.FC = () => {
       />
 
       <div className="relative h-full flex flex-col gap-4 p-4 md:gap-6 md:p-6 lg:p-10 md:grid md:grid-cols-12">
-        <div className="order-1 col-span-12 md:col-span-6 z-30 flex items-start md:items-center">
+        <div className="order-1 col-span-12 md:col-span-6 z-50 md:z-30 flex items-start md:items-center relative">
           <div className="text-left w-full md:pl-8 lg:pl-[90px]">
             <h4 className="text-white text-xl md:text-4xl font-semibold mb-3 md:mb-6 drop-shadow-lg md:drop-shadow-none">
               {item.title}
             </h4>
             <dl className="text-white/95 md:text-white/85 text-xs md:text-base space-y-2 md:space-y-3 drop-shadow-md md:drop-shadow-none">
               {item.specs.map((spec) => (
-                <div key={spec.label} className="flex flex-col md:flex-row gap-0.5 md:gap-4">
-                  <dt className="md:w-32 text-white/80 md:text-white/60 text-[10px] md:text-xs uppercase tracking-wide font-medium md:font-normal">
+                <div key={spec.label} className="flex flex-col xl:flex-row gap-0.5 xl:gap-4">
+                  <dt className="xl:w-32 text-white/80 md:text-white/60 text-[10px] md:text-xs uppercase tracking-wide font-medium md:font-normal">
                     {spec.label}
                   </dt>
-                  <dd className="flex-1 text-xs md:text-base">{spec.value}</dd>
+                  <dd className="flex-1 text-xs md:text-base xl:whitespace-nowrap">{spec.value}</dd>
                 </div>
               ))}
             </dl>

@@ -27,8 +27,8 @@ const InCabinInnovation: React.FC = () => {
   return (
     <section className="relative px-4 text-center py-16 md:px-0">
       <div className="relative z-10 container mx-auto flex flex-col items-center">
-        <div className="relative w-full max-w-2xl mb-12 px-4 md:px-4">
-          <div className="inline-block w-full">
+        <div className="relative w-full max-w-2xl mb-12 px-0 sm:px-4 md:px-4">
+          <div className="inline-block w-full text-[1.4rem] sm:text-3xl md:text-4xl lg:text-5xl whitespace-nowrap">
             <SectionTitle>Innovate Your Own In-Cabin</SectionTitle>
           </div>
           <img
