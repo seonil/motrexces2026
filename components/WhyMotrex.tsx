@@ -70,7 +70,7 @@ const WhyMOTREX: React.FC = () => {
             margin: 4rem auto 0;
             min-height: 500px;
             display: flex;
-            align-items: stretch;
+            align-items: center;
             justify-content: center;
             gap: 1.25rem;
             flex-wrap: wrap;
