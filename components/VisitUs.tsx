@@ -1,8 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import SectionTitle from './SectionTitle';
 
 const VisitUs: React.FC = () => {
+  const [isLinkedInHovered, setIsLinkedInHovered] = useState(false);
+  const [isMobileLinkedInHovered, setIsMobileLinkedInHovered] = useState(false);
+
   return (
     <section className="py-20 md:py-32 px-4 text-center">
       <div className="container mx-auto flex flex-col items-center">
@@ -50,9 +53,16 @@ const VisitUs: React.FC = () => {
                             href="https://kr.linkedin.com/company/motrex"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 md:mr-[2%]"
+                            className="flex items-center gap-2 md:mr-[2%] transition-opacity duration-200"
+                            onMouseEnter={() => setIsLinkedInHovered(true)}
+                            onMouseLeave={() => setIsLinkedInHovered(false)}
+                            onMouseDown={() => setIsLinkedInHovered(true)}
+                            onMouseUp={() => setIsLinkedInHovered(false)}
                         >
-                            <img src="/images/icon-linkedin.png" className="h-[33px] md:h-8 lg:h-[60px] w-auto"/>
+                            <img
+                              src={isLinkedInHovered ? "/images/icon-linkedin-hover.png" : "/images/icon-linkedin.png"}
+                              className="h-[33px] md:h-8 lg:h-[60px] w-auto"
+                            />
                         </a>
                     </div>
                 </div>
@@ -83,9 +93,14 @@ const VisitUs: React.FC = () => {
                     href="https://kr.linkedin.com/company/motrex"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 self-start"
+                    className="flex items-center gap-2 self-start transition-opacity duration-200"
+                    onTouchStart={() => setIsMobileLinkedInHovered(true)}
+                    onTouchEnd={() => setIsMobileLinkedInHovered(false)}
                 >
-                    <img src="/images/icon-linkedin.png" className="h-6 w-auto"/>
+                    <img
+                      src={isMobileLinkedInHovered ? "/images/icon-linkedin-hover.png" : "/images/icon-linkedin.png"}
+                      className="h-6 w-auto"
+                    />
                 </a>
             </div>
         </div>
