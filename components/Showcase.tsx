@@ -365,6 +365,7 @@ const ShowcaseContent: ShowcaseEntry[] = [
             "/images/driving1.png",
             "/images/driving2.png",
             "/images/driving3.png",
+            "/images/driving4.png",
         ],
     },
     {
